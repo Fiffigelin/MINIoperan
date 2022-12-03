@@ -1,0 +1,5 @@
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\MINIoperan.csproj.AssemblyReference.cache
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\MINIoperan.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\MINIoperan.AssemblyInfoInputs.cache
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\MINIoperan.AssemblyInfo.cs
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\MINIoperan.csproj.CoreCompileInputs.cache

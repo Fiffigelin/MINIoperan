@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\nyman\\Documents\\SUVNET22\\GIT\\Inlämningar\\MINIoperan\\MINIoperan.csproj": {}
+    "C:\\Users\\nyman\\Documents\\SUVNET22\\GIT\\Inlämningar\\MINIoperan\\MINIoperan.csproj": {}
   },
   "projects": {
-    "c:\\Users\\nyman\\Documents\\SUVNET22\\GIT\\Inlämningar\\MINIoperan\\MINIoperan.csproj": {
+    "C:\\Users\\nyman\\Documents\\SUVNET22\\GIT\\Inlämningar\\MINIoperan\\MINIoperan.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\nyman\\Documents\\SUVNET22\\GIT\\Inlämningar\\MINIoperan\\MINIoperan.csproj",
+        "projectUniqueName": "C:\\Users\\nyman\\Documents\\SUVNET22\\GIT\\Inlämningar\\MINIoperan\\MINIoperan.csproj",
         "projectName": "MINIoperan",
-        "projectPath": "c:\\Users\\nyman\\Documents\\SUVNET22\\GIT\\Inlämningar\\MINIoperan\\MINIoperan.csproj",
+        "projectPath": "C:\\Users\\nyman\\Documents\\SUVNET22\\GIT\\Inlämningar\\MINIoperan\\MINIoperan.csproj",
         "packagesPath": "C:\\Users\\nyman\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\nyman\\Documents\\SUVNET22\\GIT\\Inlämningar\\MINIoperan\\obj\\",
+        "outputPath": "C:\\Users\\nyman\\Documents\\SUVNET22\\GIT\\Inlämningar\\MINIoperan\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
