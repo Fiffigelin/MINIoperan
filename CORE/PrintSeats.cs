@@ -43,15 +43,37 @@ class PrintSeats
         seatMatrix = matrix;
     }
 
-    public void PrintMatrix()
+    public void PrintMatrix(List<Seat> availableSeats)
     {
+        bool IsSeatAvailable = false;
         int[,] matrix = seatMatrix;
         for (int i = 0; i < matrix.GetLength(0); i++)
         {
             for (int j = 0; j < matrix.GetLength(1); j++)
             {
-                Console.Write(matrix[i, j] + " ");
+                foreach (var seat in availableSeats)
+                {
+                    if (matrix[i,j] == seat.Id)
+                    {
+                        IsSeatAvailable = true;
+                        break;
+                    }
+                    
+                }
+                if (IsSeatAvailable == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(matrix[i, j] + " ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    IsSeatAvailable = false;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write(matrix[i, j] + " ");
+                }
             }
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }
     }

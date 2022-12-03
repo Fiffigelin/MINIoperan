@@ -13,8 +13,9 @@ class SeatDB
         return _sqlconnection.Query<Seat>($@"SELECT* FROM seats WHERE seats.section = 'Parkett';").ToList();
     }
 
-    public List<Seat> BookedSeats()
+    public List<Seat> AvailableSeats()
     {
+        // jag har inte lagt in några shower att välja på...., ersätt 17 med lämplig variabel
         return _sqlconnection.Query<Seat>($@"SELECT * FROM seats WHERE seats.id IN 
         (SELECT reservations.shows_id FROM reservations WHERE reservations.shows_dates_id = '17')
         UNION

@@ -8,7 +8,8 @@
         list = db.GetAllSeats();
 
         print.GetList(list);
-        print.PrintMatrix();
+        List<Seat> available = db.AvailableSeats();
+        print.PrintMatrix(available);
 
         Console.ReadLine();
     }
