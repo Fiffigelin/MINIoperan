@@ -1,10 +1,8 @@
-using Dapper;
 using MySqlConnector;
-
-class ReservationDB
+class SQLConnection
 {
     MySqlConnection _sqlconnection;
-    public ReservationDB()
+    public SQLConnection()
     {
         _sqlconnection = new MySqlConnection("Server = localhost;Database = test_operan;Uid=root");
     }
