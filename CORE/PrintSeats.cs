@@ -18,24 +18,20 @@ class PrintSeats
             if (item.Row == 1)
             {
                 x++;
-                Console.WriteLine("x = " + x);
             }
             if (item.Row > y)
             {
                 y++;
-                Console.WriteLine("y = " + y);
             }
         }
         int[,] matrix = new int[y, x];
         x = 0;
         y = 0;
-        Console.WriteLine("X = " + matrix.GetLength(1));
-        Console.WriteLine("Y = " + matrix.GetLength(0));
+
         foreach (var item in seatList)
         {
             if (x >= matrix.GetLength(1)) x = 0;
             y = item.Row - 1;
-            Console.WriteLine(x + " " + y);
 
             matrix[y, x] = item.Id;
             x++;
