@@ -11,14 +11,19 @@ class CustomerDB
 
     public void Connect()
     {
-        _sqlconnection = new MySqlConnection("Server = localhost;Database = mini;Uid=root");
+        _sqlconnection = new MySqlConnection("Server = localhost;Database = test_operan;Uid=root");
     }
 
     public int InsertNewCustomer(Customer customer)
     {
         string sql = $@"INSERT INTO customers (id, first_name, last_name, email, phonenumber) 
-        VALUES (NULL, '{customer.FirstName}', '{customer.LastName}', '{customer.Email}', '{customer.Phonenumber}')";
-        int id = _sqlconnection.QuerySingle<int>(sql);
-        return id;
+        VALUES (NULL, '{customer.FirstName}', '{customer.LastName}', '{customer.Email}', '{customer.Phonenumber}');
+        SELECT LAST_INSERT_ID()";
+        return _sqlconnection.QuerySingle<int>(sql);
+    }
+
+    public void DeleteCustomer(Customer customer)
+    {
+        
     }
 }

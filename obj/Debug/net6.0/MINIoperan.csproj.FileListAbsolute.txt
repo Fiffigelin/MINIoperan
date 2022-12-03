@@ -3,3 +3,16 @@ C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\M
 C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\MINIoperan.AssemblyInfoInputs.cache
 C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\MINIoperan.AssemblyInfo.cs
 C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\MINIoperan.csproj.CoreCompileInputs.cache
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\bin\Debug\net6.0\MINIoperan.exe
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\bin\Debug\net6.0\MINIoperan.deps.json
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\bin\Debug\net6.0\MINIoperan.runtimeconfig.json
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\bin\Debug\net6.0\MINIoperan.dll
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\bin\Debug\net6.0\MINIoperan.pdb
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\bin\Debug\net6.0\Dapper.dll
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\bin\Debug\net6.0\MySqlConnector.dll
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\MINIoperan.csproj.CopyComplete
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\MINIoperan.dll
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\refint\MINIoperan.dll
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\MINIoperan.pdb
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\MINIoperan.genruntimeconfig.cache
+C:\Users\nyman\Documents\SUVNET22\GIT\Inlämningar\MINIoperan\obj\Debug\net6.0\ref\MINIoperan.dll
