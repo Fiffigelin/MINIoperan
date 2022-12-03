@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "PcUOBbcYG+sF0ll3Q3vBczkI6anbawFIayRCUq9WjXniVhHidIqVXkhhYj8DkJ8T0slO7fV9HbWvQnU2qcyfLg==",
+  "dgSpecHash": "h19e7udxgddzOpNKjIC9UxCGbpjVaihdxTfC5IPqC5sRiT4kiTdVaHCwJkNjultdsb+Ck02Fk7Q4MA0JjJJ0Dw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nyman\\Documents\\SUVNET22\\GIT\\Inlämningar\\MINIoperan\\MINIoperan.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "c:\\Users\\nyman\\Documents\\SUVNET22\\GIT\\Inlämningar\\MINIoperan\\MINIoperan.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nyman\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\nyman\\.nuget\\packages\\mysqlconnector\\2.2.0\\mysqlconnector.2.2.0.nupkg.sha512"
+  ],
   "logs": []
 }
