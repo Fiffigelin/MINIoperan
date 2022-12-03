@@ -21,9 +21,4 @@ class CustomerDB
         SELECT LAST_INSERT_ID()";
         return _sqlconnection.QuerySingle<int>(sql);
     }
-
-    public void DeleteCustomer(Customer customer)
-    {
-        
-    }
 }
