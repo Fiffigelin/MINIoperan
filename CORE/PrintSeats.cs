@@ -70,7 +70,7 @@ class PrintSeats
                 }
             }
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine();
+            Console.Write(Environment.NewLine);
         }
     }
 }
