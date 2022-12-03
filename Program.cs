@@ -2,12 +2,14 @@
 {
     private static void Main(string[] args)
     {
-        SeatDB seat = new();
-        List<Seat> seats = seat.GetAllSeats();
-        foreach (var item in seats)
-        {
-            Console.WriteLine($"{item.Section} {item.Row} {item.Id} {item.Price}");
-        }
+        SeatDB db = new();
+        PrintSeats print = new();
+        List <Seat> list = new();
+        list = db.GetAllSeats();
 
+        print.GetList(list);
+        print.PrintMatrix();
+
+        Console.ReadLine();
     }
 }
