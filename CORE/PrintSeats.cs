@@ -59,14 +59,14 @@ class PrintSeats
                 if (IsSeatAvailable == true)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write(matrix[i, j] + " ");
+                    Console.Write(matrix[i, j].ToString().PadRight(2) + " ".PadLeft(2));
                     Console.ForegroundColor = ConsoleColor.White;
                     IsSeatAvailable = false;
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write(matrix[i, j] + " ");
+                    Console.Write(matrix[i, j].ToString().PadRight(2) + " ".PadLeft(2));
                 }
             }
             Console.ForegroundColor = ConsoleColor.White;
