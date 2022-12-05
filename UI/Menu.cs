@@ -1,14 +1,43 @@
 class Menu
 {
-    private string[] menuLines {get; set;}
     private int markedLine = 0;
-    private void PrintMainMenu()
-    {
-        Console.WriteLine($@"
-        WELCOME TO GÖTEBORGS MINI-OPERAN\n
-        Use 'up/down' arrows to navigate.
-        Choose with 'enter'.\n");
 
-        menuLines = {"\t- "}
+    private int PrintMainMenu(string[] menuChoice)
+    {
+        while (true)
+        {
+            for (int i = 0; i < menuChoice.Length; i++)
+            {
+                if (i == markedLine)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                }
+                Console.WriteLine(menuChoice[i]);
+                Console.ResetColor();
+            }
+
+            ConsoleKey key = Console.ReadKey().Key;
+            switch (key)
+            {
+                case ConsoleKey.DownArrow:
+                    markedLine++;
+                    if (markedLine > menuChoice.Length - 1)
+                    {
+                        markedLine = 0;
+                    }
+                    break;
+                case ConsoleKey.UpArrow:
+                    markedLine--;
+                    if (markedLine < 0)
+                    {
+                        markedLine = menuChoice.Length - 1;
+                    }
+                    break;
+                case ConsoleKey.Enter:
+                    return markedLine;
+                default:
+                break;
+            }
+        }
     }
 }
