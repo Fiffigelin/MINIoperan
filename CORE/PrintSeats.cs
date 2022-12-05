@@ -8,6 +8,7 @@ class PrintSeats
         seatList = list;
         ConvertToMatrix();
     }
+    // convert objects from list to elements in a dynamic array
     private void ConvertToMatrix()
     {
         int x = 0;
@@ -56,6 +57,7 @@ class PrintSeats
                     }
                     
                 }
+                // prints out green for available and red for occupied
                 if (IsSeatAvailable == true)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
