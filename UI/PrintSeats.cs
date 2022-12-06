@@ -1,4 +1,4 @@
-class PrintSeats
+class SeatsMapper
 {
     private List<Seat> seatList = new();
     int[,] seatMatrix;

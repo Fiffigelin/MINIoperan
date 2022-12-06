@@ -3,7 +3,7 @@
     private static void Main(string[] args)
     {
         SeatDB db = new();
-        PrintSeats print = new();
+        SeatsMapper print = new();
         List<Seat> list = new();
         list = db.GetAllSeats();
 
