@@ -2,7 +2,7 @@ class Menu
 {
     private int markedLine = 0;
 
-    private int PrintMainMenu(string[] menuChoice)
+    public int PrintMenu(string[] menuChoice)
     {
         while (true)
         {
@@ -16,6 +16,7 @@ class Menu
                 Console.ResetColor();
             }
 
+            Console.CursorVisible = false;
             ConsoleKey key = Console.ReadKey().Key;
             switch (key)
             {
@@ -36,8 +37,9 @@ class Menu
                 case ConsoleKey.Enter:
                     return markedLine;
                 default:
-                break;
+                    break;
             }
+            Console.Clear();
         }
     }
 }

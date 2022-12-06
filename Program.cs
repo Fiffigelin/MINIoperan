@@ -6,22 +6,22 @@
         SeatsMapper print = new();
         List<Seat> list = new();
         list = db.GetAllSeats();
-
+        Menu mainMenu = new();
         print.GetList(list);
-        List<Seat> available = db.AvailableSeats();
-        print.PrintMatrix(available);
 
-
-        Console.WriteLine(@$"
-                                              ▄█▀      ▀█▄
-                                          ▄▀▀▓▀▄         ██▄  
-                                         ▓  ▄▀  █        ██▓█
-                                          ▀▄▓▓▄▀         ▓██▓▌
-                                           █▓██▌         ▓▓▓█▌
-                                            █▓█▌         ▐▓██        
-                            █▀▄▀█ █ █▄ █ █   ▀▓█         ▐▓▀
-                            █ ▀ █ █ █ ▀█ █     ▀█▄     ▄█▀
-    ");
-
+        string[] menuChoice = { "Show seats", "Exit" };
+        int menuInt = mainMenu.PrintMenu(menuChoice);
+        switch (menuInt)
+        {
+            case 0:
+                List<Seat> available = db.AvailableSeats();
+                print.ChooseSeats(available);
+                break;
+            case 1:
+                Environment.Exit(0);
+                break;
+            default:
+            break;
+        }
     }
 }

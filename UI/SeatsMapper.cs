@@ -20,7 +20,8 @@ class SeatsMapper
 
         while (true)
         {
-            PrintMatrix(availableSeats);
+              Console.WriteLine($"UserY = {UserY}, UserX = {UserX}");
+            PrintMatrix(availableSeats, UserY, UserX);
 
             ConsoleKey key = Console.ReadKey().Key;
             switch (key)
@@ -59,6 +60,7 @@ class SeatsMapper
                 default:
                 break;
             }
+            Console.Clear();
         }
     }
     // convert objects from list to elements in a dynamic array
@@ -93,7 +95,7 @@ class SeatsMapper
         seatMatrix = matrix;
     }
 
-    public void PrintMatrix(List<Seat> availableSeats)
+    private void PrintMatrix(List<Seat> availableSeats, int UserY, int UserX)
     {
         bool IsSeatAvailable = false;
         int[,] matrix = seatMatrix;
@@ -114,18 +116,25 @@ class SeatsMapper
                 if (IsSeatAvailable == true)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write(matrix[i, j].ToString().PadRight(2) + " ".PadLeft(2));
-                    Console.ForegroundColor = ConsoleColor.White;
                     IsSeatAvailable = false;
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write(matrix[i, j].ToString().PadRight(2) + " ".PadLeft(2));
                 }
+
+                if(UserY == i && UserX == j)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+                Console.Write(matrix[i, j].ToString().PadRight(2) + " ".PadLeft(2));
             }
-            Console.ForegroundColor = ConsoleColor.White;
             Console.Write(Environment.NewLine);
         }
+        Console.ResetColor();
     }
 }
