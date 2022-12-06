@@ -8,6 +8,59 @@ class SeatsMapper
         seatList = list;
         ConvertToMatrix();
     }
+
+    public int ChooseSeats(List<Seat> availableSeats)
+    {
+        int maxX = seatMatrix.GetLength(0);
+        int maxY = seatMatrix.GetLength(1);
+        int UserY = 0;
+        int UserX = 0;
+
+        Console.CursorVisible = false;
+
+        while (true)
+        {
+            PrintMatrix(availableSeats);
+
+            ConsoleKey key = Console.ReadKey().Key;
+            switch (key)
+            {
+                case ConsoleKey.DownArrow:
+                    UserY++;
+                    if (UserY > maxY - 1)
+                    {
+                        UserY = 0;
+                    }
+                    break;
+                case ConsoleKey.UpArrow:
+                    UserY--;
+                    if (UserY < 0)
+                    {
+                        UserY = maxY - 1;
+                    }
+                    break;
+                case ConsoleKey.RightArrow:
+                    UserX++;
+                    if (UserX > maxX - 1)
+                    {
+                        UserX = 0;
+                    }
+                    break;
+                case ConsoleKey.LeftArrow:
+                    UserX--;
+                    if (UserX < 0)
+                    {
+                        UserX = maxX -1;
+                    }
+                    break;
+                case ConsoleKey.Enter:
+                    Console.CursorVisible = true;
+                    return seatMatrix[UserY, UserX];
+                default:
+                break;
+            }
+        }
+    }
     // convert objects from list to elements in a dynamic array
     private void ConvertToMatrix()
     {
@@ -50,12 +103,12 @@ class SeatsMapper
             {
                 foreach (var seat in availableSeats)
                 {
-                    if (matrix[i,j] == seat.Id)
+                    if (matrix[i, j] == seat.Id)
                     {
                         IsSeatAvailable = true;
                         break;
                     }
-                    
+
                 }
                 // prints out green for available and red for occupied
                 if (IsSeatAvailable == true)
