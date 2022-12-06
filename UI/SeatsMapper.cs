@@ -20,7 +20,7 @@ class SeatsMapper
 
         while (true)
         {
-              Console.WriteLine($"UserY = {UserY}, UserX = {UserX}");
+            Console.WriteLine($"UserY = {UserY}, UserX = {UserX}");
             PrintMatrix(availableSeats, UserY, UserX);
 
             ConsoleKey key = Console.ReadKey().Key;
@@ -51,14 +51,14 @@ class SeatsMapper
                     UserX--;
                     if (UserX < 0)
                     {
-                        UserX = maxX -1;
+                        UserX = maxX - 1;
                     }
                     break;
                 case ConsoleKey.Enter:
                     Console.CursorVisible = true;
                     return seatMatrix[UserY, UserX];
                 default:
-                break;
+                    break;
             }
             Console.Clear();
         }
@@ -123,7 +123,7 @@ class SeatsMapper
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                 }
 
-                if(UserY == i && UserX == j)
+                if (UserY == i && UserX == j)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
                 }

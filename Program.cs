@@ -9,13 +9,14 @@
         Menu mainMenu = new();
         print.GetList(list);
 
-        string[] menuChoice = { "Show seats", "Exit" };
+        string[] menuChoice = { "Seats", "Exit" };
         int menuInt = mainMenu.PrintMenu(menuChoice);
         switch (menuInt)
         {
             case 0:
                 List<Seat> available = db.AvailableSeats();
-                print.ChooseSeats(available);
+                int bookSeats = print.ChooseSeats(available);
+                Console.WriteLine("Seat : " + bookSeats);
                 break;
             case 1:
                 Environment.Exit(0);
