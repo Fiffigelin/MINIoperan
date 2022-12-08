@@ -18,7 +18,7 @@ class ShowDB
     {
         List<ShowDates> listOfShows = new();
         var sql = ($@"SELECT shows.id, shows.title, shows.type, 
-        show_dates.id, show_dates.date, show_dates.time
+        show_dates.dateid, show_dates.date, show_dates.time
         FROM shows
         INNER JOIN show_dates ON shows.id = show_dates.shows_id;");
 
@@ -29,12 +29,13 @@ class ShowDB
             while (reader.Read())
             {
                 int id = Convert.ToInt32(reader["id"].ToString());
-                string title = reader["title"].ToString();
-                string type = reader["type"].ToString();
-                string date = reader["date"].ToString();
-                string time = reader["time"].ToString();
+                string title = reader["title"].ToString()!;
+                string type = reader["type"].ToString()!;
+                int dateId = Convert.ToInt32(reader["dateid"].ToString());
+                string date = reader["date"].ToString()!;
+                string time = reader["time"].ToString()!;
 
-                ShowDates showDates = new(id, title, type);
+                ShowDates showDates = new(id, dateId, title, type);
                 showDates.DateTime(date, time);
                 listOfShows.Add(showDates);
             }

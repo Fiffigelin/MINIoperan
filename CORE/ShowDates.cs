@@ -1,14 +1,16 @@
 class ShowDates
 {
-    public int Id {get; set;}
+    public int ShowId {get; set;}
+    public int DateTimeId {get; set;}
     public string Title {get; set;}
     public string Type {get; set;}
     public DateTime Date {get; set;}
     public TimeOnly Time {get; set;}
 
-    public ShowDates(int id, string title, string type)
+    public ShowDates(int id, int dateId, string title, string type)
     {
-        Id = id;
+        ShowId = id;
+        DateTimeId = dateId;
         Title = title;
         Type = type;
     }

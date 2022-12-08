@@ -13,7 +13,7 @@
         showDates = showDB.SelectShowDate();
         foreach (var item in showDates)
         {
-            Console.WriteLine($@"{item.Id} {item.Title} {item.Type} {item.Date.ToString("yyyy-MM-dd")} {item.Time}");
+            Console.WriteLine($@"{item.ShowId} {item.Title} {item.Type} {item.DateTimeId} {item.Date.ToString("yyyy-MM-dd")} {item.Time}");
         }
 
         // string[] menuChoice = { "Seats", "Exit" };
