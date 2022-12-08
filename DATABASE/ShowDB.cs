@@ -14,9 +14,9 @@ class ShowDB
     //     string sql = $@"SELECT * FROM show"
     // }
 
-    public List<ShowDates> SelectShowDate()
+    public List<ShowToDates> SelectShowDate()
     {
-        List<ShowDates> listOfShows = new();
+        List<ShowToDates> listOfShows = new();
         var sql = ($@"SELECT shows.id, shows.title, shows.type, 
         show_dates.dateid, show_dates.date, show_dates.time
         FROM shows
@@ -35,7 +35,7 @@ class ShowDB
                 string date = reader["date"].ToString()!;
                 string time = reader["time"].ToString()!;
 
-                ShowDates showDates = new(id, dateId, title, type);
+                ShowToDates showDates = new(id, dateId, title, type);
                 showDates.DateTime(date, time);
                 listOfShows.Add(showDates);
             }

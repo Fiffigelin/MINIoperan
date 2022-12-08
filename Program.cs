@@ -9,7 +9,7 @@
         Menu mainMenu = new();
         print.GetList(list);
         ShowDB showDB = new();
-        List<ShowDates> showDates = new();
+        List<ShowToDates> showDates = new();
         showDates = showDB.SelectShowDate();
         foreach (var item in showDates)
         {

@@ -1,4 +1,4 @@
-class ShowDates
+class ShowToDates
 {
     public int ShowId {get; set;}
     public int DateTimeId {get; set;}
@@ -7,7 +7,7 @@ class ShowDates
     public DateTime Date {get; set;}
     public TimeOnly Time {get; set;}
 
-    public ShowDates(int id, int dateId, string title, string type)
+    public ShowToDates(int id, int dateId, string title, string type)
     {
         ShowId = id;
         DateTimeId = dateId;
