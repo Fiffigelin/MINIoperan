@@ -6,6 +6,7 @@ class Menu
     {
         while (true)
         {
+            Header();
             for (int i = 0; i < menuChoice.Length; i++)
             {
                 if (i == markedLine)
@@ -41,5 +42,20 @@ class Menu
             }
             Console.Clear();
         }
+    }
+
+    private void Header()
+    {
+        Console.Clear();
+        Console.WriteLine(@$"
+                              ▄█▀      ▀█▄
+                          ▄▀▀▓▀▄         ██▄  
+                         ▓  ▄▀  █        ██▓█
+                          ▀▄▓▓▄▀         ▓██▓▌
+                           █▓██▌         ▓▓▓█▌
+                            █▓█▌         ▐▓██        
+            █▀▄▀█ █ █▄ █ █   ▀▓█         ▐▓▀
+            █ ▀ █ █ █ ▀█ █     ▀█▄     ▄█▀
+    ");
     }
 }
