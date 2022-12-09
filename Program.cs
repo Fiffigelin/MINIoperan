@@ -5,8 +5,10 @@
         ShowDB db = new();
         List<Show> show = new();
         show = db.SelectShows();
-        Menu menu = new();
-        menu.PrintMenuObject(show);
+        TableUI table = new();
+        string[] stringarray = {"Id", "Title"};
+        table.PrintEmployees(show, stringarray);
+        Console.ReadKey();
 
         // Menu mainMenu = new();
 
