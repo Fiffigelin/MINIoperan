@@ -1,10 +1,8 @@
 class Menu
 {
-    private int markedLine = 0;
-    private int objectInt = 1;
-
     public int PrintMenu(string[] menuChoice)
     {
+        int markedLine = 0;
         while (true)
         {
             Header();
@@ -47,24 +45,20 @@ class Menu
 
     public int PrintMenuObject(List<Show> showObjects)
     {
+        int objectInt = 1;
         while (true)
         {
             Header();
 
             foreach (var item in showObjects)
             {
-                Console.WriteLine(item.Id);
                 if (item.Id == objectInt)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                 }
-                else
-                {
-                    Console.ResetColor();
-                }
+                Console.WriteLine(item.Title);
+                Console.ResetColor();
             }
-            
-            
 
             Console.CursorVisible = false;
             ConsoleKey key = Console.ReadKey().Key;
@@ -72,16 +66,16 @@ class Menu
             {
                 case ConsoleKey.DownArrow:
                     objectInt++;
-                    if (objectInt > showObjects.Count - 1)
+                    if (objectInt > showObjects.Count)
                     {
-                        objectInt = 0;
+                        objectInt = 1;
                     }
                     break;
                 case ConsoleKey.UpArrow:
                     objectInt--;
-                    if (objectInt < 0)
+                    if (objectInt < 1)
                     {
-                        objectInt = showObjects.Count - 1;
+                        objectInt = showObjects.Count;
                     }
                     break;
                 case ConsoleKey.Enter:
