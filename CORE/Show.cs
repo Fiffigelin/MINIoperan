@@ -4,6 +4,10 @@ class Show
     public string Title {get; set;}
     public string Type {get; set;}
 
+    public Show (string title)
+    {
+        Title = title;
+    }
     public Show(string title, string type)
     {
         Title = title;

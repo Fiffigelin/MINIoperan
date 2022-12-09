@@ -9,10 +9,11 @@ class ShowDB
         _sqlconnection = new MySqlConnection("Server = localhost;Database = test_operan;Uid=root");
     }
 
-    // public List<Show> SelectShow()
-    // {
-    //     string sql = $@"SELECT * FROM show"
-    // }
+    public List<Show> SelectShowTitle()
+    {
+        var showsTitle =_sqlconnection.Query<Show>($@"SELECT shows.title FROM shows").ToList();
+        return showsTitle;
+    }
 
     public List<ShowToDates> SelectShowDate()
     {
