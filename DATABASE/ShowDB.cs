@@ -11,12 +11,19 @@ class ShowDB
 
     public List<Show> SelectShowTitle()
     {
-        var showsTitle =_sqlconnection.Query<Show>($@"SELECT shows.title FROM shows").ToList();
+        var showsTitle = _sqlconnection.Query<Show>($@"SELECT shows.title FROM shows").ToList();
         return showsTitle;
+    }
+
+    public List<Show> SelectShows()
+    {
+        var showsList = _sqlconnection.Query<Show>($@"SELECT * FROM shows").ToList();
+        return showsList;
     }
 
     public List<ShowToDates> SelectShowDate()
     {
+        // försökt få med show_dates.id på något vis
         List<ShowToDates> listOfShows = new();
         var sql = ($@"SELECT shows.id, shows.title, shows.type, 
         show_dates.dateid, show_dates.date, show_dates.time

@@ -4,7 +4,7 @@
     {
         ShowDB db = new();
         List<Show> show = new();
-        show = db.SelectShowTitle();
+        show = db.SelectShows();
         Menu menu = new();
         menu.PrintMenuObject(show);
 

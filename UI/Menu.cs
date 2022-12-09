@@ -1,6 +1,7 @@
 class Menu
 {
     private int markedLine = 0;
+    private int objectInt = 1;
 
     public int PrintMenu(string[] menuChoice)
     {
@@ -49,36 +50,42 @@ class Menu
         while (true)
         {
             Header();
-            for (int i = 0; i < showObjects.Count; i++)
+
+            foreach (var item in showObjects)
             {
-                if (i == markedLine)
+                Console.WriteLine(item.Id);
+                if (item.Id == objectInt)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                 }
-                Console.WriteLine(showObjects[i]);
-                Console.ResetColor();
+                else
+                {
+                    Console.ResetColor();
+                }
             }
+            
+            
 
             Console.CursorVisible = false;
             ConsoleKey key = Console.ReadKey().Key;
             switch (key)
             {
                 case ConsoleKey.DownArrow:
-                    markedLine++;
-                    if (markedLine > showObjects.Count - 1)
+                    objectInt++;
+                    if (objectInt > showObjects.Count - 1)
                     {
-                        markedLine = 0;
+                        objectInt = 0;
                     }
                     break;
                 case ConsoleKey.UpArrow:
-                    markedLine--;
-                    if (markedLine < 0)
+                    objectInt--;
+                    if (objectInt < 0)
                     {
-                        markedLine = showObjects.Count - 1;
+                        objectInt = showObjects.Count - 1;
                     }
                     break;
                 case ConsoleKey.Enter:
-                    return markedLine;
+                    return objectInt;
                 default:
                     break;
             }
@@ -88,7 +95,7 @@ class Menu
 
     private void Header()
     {
-        Console.Clear();
+        // Console.Clear();
         Console.WriteLine(@$"
                               ▄█▀      ▀█▄
                           ▄▀▀▓▀▄         ██▄  

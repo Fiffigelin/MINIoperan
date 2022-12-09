@@ -5,7 +5,7 @@ class ShowsUI
         while (true)
         {
             ShowDB showDB = new();
-            List <Show> listOfShow = showDB.SelectShowTitle();
+            List <Show> listOfShow = showDB.SelectShows();
             // string[] shows = { "Phantom of the Opera", "Cats", "Starwars : the Empire strikes back", "Peter Pan går åt helvete" };
             Menu showMenu = new();
             int showInt = showMenu.PrintMenuObject(listOfShow);
