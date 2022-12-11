@@ -1,5 +1,6 @@
 class SeatsMapper
 {
+    private Menu menu = new();
     private List<Seat> seatList = new();
     int[,] seatMatrix;
 
@@ -20,6 +21,8 @@ class SeatsMapper
 
         while (true)
         {
+            menu.Header();
+            Console.WriteLine("CHOOSE SEATS WITH 'A'. UNDO CHOOSEN SEAT WITH 'D'. MAKE RESERVATION WITH 'A'. RETURN WITH 'Q'.");
             Console.WriteLine($"UserY = {UserY}, UserX = {UserX}");
             PrintMatrix(availableSeats, UserY, UserX);
 

@@ -16,7 +16,7 @@ class ShowsUI
             showId = menu.PrintMenuObjectTitle(showTitle);
             if (showId == -1) break;
             ShowsDateTime(showId);
-            SeatsPerShow(showDatesId);
+            if (showDatesId > 0) SeatsPerShow(showDatesId);
         }
     }
 

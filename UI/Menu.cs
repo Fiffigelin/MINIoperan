@@ -6,6 +6,7 @@ class Menu
         while (true)
         {
             Header();
+            Console.WriteLine("WELCOME TO MINI OPERAN! SELECT WITH ENTER AND QUITE WITH Q\n");
             for (int i = 0; i < menuChoice.Length; i++)
             {
                 if (i == markedLine)
@@ -49,7 +50,7 @@ class Menu
         while (true)
         {
             Header();
-
+            Console.WriteLine("WELCOME TO MINI OPERAN! SELECT WITH ENTER AND QUITE WITH Q\n");
             foreach (var item in showObjects)
             {
                 if (item.Id == objectInt)
@@ -95,7 +96,11 @@ class Menu
         while (true)
         {
             Header();
-            Console.WriteLine(showObjects.ElementAt(1).Title + "\n");
+            Console.WriteLine($@"
+WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
+
+{showObjects.ElementAt(1).Title}");
+
             foreach (var item in showObjects)
             {
                 if (item.DateTimeId == objectInt)
@@ -135,7 +140,7 @@ class Menu
         }
     }
 
-    private void Header()
+    public void Header()
     {
         Console.Clear();
         Console.WriteLine(@$"
