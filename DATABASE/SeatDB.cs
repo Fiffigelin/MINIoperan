@@ -13,13 +13,17 @@ class SeatDB
         return _sqlconnection.Query<Seat>($@"SELECT* FROM seats WHERE seats.section = 'Parkett';").ToList();
     }
 
-    public List<Seat> AvailableSeats()
+    public List<Seat> AvailableSeats(int dateId)
     {
-        // jag har inte lagt in några shower att välja på...., ersätt 17 med lämplig variabel
-        return _sqlconnection.Query<Seat>($@"SELECT * FROM seats WHERE seats.id IN 
-        (SELECT reservations.shows_id FROM reservations WHERE reservations.shows_dates_id = '17')
-        UNION
-        SELECT * FROM seats WHERE seats.id NOT IN (SELECT seats_to_reservations.seats_id FROM seats_to_reservations)
-        ORDER BY id ASC;").ToList();
+        // Gets all seats that are available
+        return _sqlconnection.Query<Seat>($@"SELECT seats.id 
+        FROM seats
+        WHERE seats.id NOT IN 
+        (select seats_to_reservations.seats_id FROM seats_to_reservations WHERE seats_to_reservations.shows_dates_id = '{dateId}')").ToList();
     }
 }
+
+
+// SELECT seats.id FROM seats
+// UNION
+// SELECT seats_to_reservations.seats_id FROM seats_to_reservations WHERE seats_to_reservations.seats_id NOT IN (SELECT seats_to_reservations.seats_id WHERE seats_to_reservations.shows_dates_id = '17');

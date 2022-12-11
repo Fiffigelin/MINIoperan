@@ -5,6 +5,11 @@ class Seat
     public int Row {get; set;}
     public int Price {get; set;}
 
+    public Seat (int id)
+    {
+        Id = id;
+    }
+
     public Seat (int id, string section, int row, int price)
     {
         Id = id;
