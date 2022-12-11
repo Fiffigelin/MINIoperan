@@ -35,6 +35,7 @@ class ShowsUI
     {
         List<Seat> seatList = new();
         List<Seat> availableSeats = new();
+        List<int> bookSeats = new();
 
         seatList = seatDB.GetAllSeats();
         seatMap.GetList(seatList);
@@ -42,7 +43,7 @@ class ShowsUI
         Console.WriteLine(showDatesId);
         Console.ReadLine();
         availableSeats = seatDB.AvailableSeats(showDatesId);
-        int bookSeats = seatMap.ChooseSeats(availableSeats);
+        bookSeats = seatMap.AvailableSeats(availableSeats);
         Console.WriteLine("Seat : " + bookSeats);
 
         // SeatDB db = new();

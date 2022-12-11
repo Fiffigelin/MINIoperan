@@ -10,8 +10,9 @@ class SeatsMapper
         ConvertToMatrix();
     }
 
-    public int ChooseSeats(List<Seat> availableSeats)
+    public List<int> AvailableSeats(List<Seat> availableSeats)
     {
+        List<int> userSeat = new();
         int maxX = seatMatrix.GetLength(0);
         int maxY = seatMatrix.GetLength(1);
         int UserY = 0;
@@ -24,7 +25,7 @@ class SeatsMapper
             menu.Header();
             Console.WriteLine("CHOOSE SEATS WITH 'A'. UNDO CHOOSEN SEAT WITH 'D'. MAKE RESERVATION WITH 'A'. RETURN WITH 'Q'.");
             Console.WriteLine($"UserY = {UserY}, UserX = {UserX}");
-            PrintMatrix(availableSeats, UserY, UserX);
+            PrintMatrix(availableSeats, userSeat, UserY, UserX);
 
             ConsoleKey key = Console.ReadKey().Key;
             switch (key)
@@ -57,9 +58,15 @@ class SeatsMapper
                         UserX = maxX - 1;
                     }
                     break;
+                case ConsoleKey.A:
+                    userSeat.Add(seatMatrix[UserY, UserX]);
+                    break;
+                case ConsoleKey.D:
+                    userSeat.Remove(seatMatrix[UserY, UserX]);
+                    break;
                 case ConsoleKey.Enter:
                     Console.CursorVisible = true;
-                    return seatMatrix[UserY, UserX];
+                    return userSeat;
                 default:
                     break;
             }
@@ -98,9 +105,10 @@ class SeatsMapper
         seatMatrix = matrix;
     }
 
-    private void PrintMatrix(List<Seat> availableSeats, int UserY, int UserX)
+    private void PrintMatrix(List<Seat> availableSeats, List<int> userSeat, int UserY, int UserX)
     {
         bool IsSeatAvailable = false;
+        bool IsSeatChoosen = false;
         int[,] matrix = seatMatrix;
         for (int i = 0; i < matrix.GetLength(0); i++)
         {
@@ -111,20 +119,34 @@ class SeatsMapper
                     if (matrix[i, j] == seat.Id)
                     {
                         IsSeatAvailable = true;
+
+                        if ((userSeat.Contains(seat.Id)))
+                        {
+                            IsSeatChoosen = true;
+                            break;
+                        }
                         break;
                     }
-
                 }
+
                 // prints out green for available and red for occupied
                 if (IsSeatAvailable == true)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     IsSeatAvailable = false;
+
+                    // print out blue when choosen for booking
+                    if (IsSeatChoosen == true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        IsSeatChoosen = false;
+                    }
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                 }
+
 
                 if (UserY == i && UserX == j)
                 {
@@ -134,6 +156,7 @@ class SeatsMapper
                 {
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
+                // Console makeup - arranges the seatsnumbers neatly
                 Console.Write(matrix[i, j].ToString().PadRight(2) + " ".PadLeft(2));
             }
             Console.Write(Environment.NewLine);
