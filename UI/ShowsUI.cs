@@ -1,20 +1,23 @@
 class ShowsUI
 {
+    public ShowDB db = new();
+    public Menu menu = new();
+    public List<Show> showTitle = new();
+    public List<ShowToDates> showDates = new();
+    public int showId {get; set;}
     public void ShowsMenu()
     {
         while (true)
         {
-            ShowDB db = new();
-            List<Show> show = new();
-            show = db.SelectShows();
-            Menu menu = new();
-            int showId = menu.PrintMenuObject(show);
+            showTitle = db.SelectShows();
+            showId = menu.PrintMenuObjectTitle(showTitle);
 
             switch(showId)
             {
                 case 1:
-                    // Phantomen på operan
-                    Environment.Exit(0);
+                    showDates = db.SelectSingleShowDate(showId);
+                    showId = menu.PrintMenuObjectDate(showDates);
+                    // Environment.Exit(0);
                 break;
 
                 case 2:

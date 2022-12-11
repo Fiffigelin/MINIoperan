@@ -43,7 +43,7 @@ class Menu
         }
     }
 
-    public int PrintMenuObject(List<Show> showObjects)
+    public int PrintMenuObjectTitle(List<Show> showObjects)
     {
         int objectInt = 1;
         while (true)
@@ -57,6 +57,50 @@ class Menu
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                 }
                 Console.WriteLine(item.Title);
+                Console.ResetColor();
+            }
+
+            Console.CursorVisible = false;
+            ConsoleKey key = Console.ReadKey().Key;
+            switch (key)
+            {
+                case ConsoleKey.DownArrow:
+                    objectInt++;
+                    if (objectInt > showObjects.Count)
+                    {
+                        objectInt = 1;
+                    }
+                    break;
+                case ConsoleKey.UpArrow:
+                    objectInt--;
+                    if (objectInt < 1)
+                    {
+                        objectInt = showObjects.Count;
+                    }
+                    break;
+                case ConsoleKey.Enter:
+                    return objectInt;
+                default:
+                    break;
+            }
+            Console.Clear();
+        }
+    }
+
+    public int PrintMenuObjectDate(List<ShowToDates> showObjects)
+    {
+        int objectInt = 1;
+        while (true)
+        {
+            Header();
+
+            foreach (var item in showObjects)
+            {
+                if (item.DateTimeId == objectInt)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                }
+                Console.WriteLine(item.Date.ToString("yyyy-MM-dd") + " " + item.Time);
                 Console.ResetColor();
             }
 

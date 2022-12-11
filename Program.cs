@@ -5,13 +5,18 @@
         ShowDB db = new();
         List<Show> show = new();
         show = db.SelectShows();
-        TableUI table = new();
-        string[] stringarray = {"Id", "Title"};
-        table.PrintEmployees(show, stringarray);
-        Console.ReadKey();
+        
+        ShowsUI showUI = new();
+        showUI.ShowsMenu();
 
+        //----------------------------------Skriver ut showerna med id-----------------------------------
+        // TableUI table = new();
+        // string[] stringarray = {"Id", "Title"};
+        // table.PrintEmployees(show, stringarray);
+        // Console.ReadKey();
+
+        //-----------------------------------Skriver ut huvudmenyn---------------------------------------
         // Menu mainMenu = new();
-
         // string[] menuChoice = { "Shows", "Exit" };
         // int menuInt = mainMenu.PrintMenu(menuChoice);
         // switch (menuInt)
