@@ -8,6 +8,7 @@ class ShowsUI
     public SeatsMapper seatMap = new();
     public List<Seat> seatList = new();
     public List<Seat> availableSeats = new();
+    public Customer customer = new();
     public List<int> bookSeats = new();
     public int showId { get; set; }
     public int showDatesId { get; set; }
@@ -50,5 +51,21 @@ class ShowsUI
             Console.WriteLine("Seat : " + item);
         }
         Console.ReadLine();
+    }
+
+    private void CustomerVerification()
+    {
+        string ? email = string.Empty;
+        while(true)
+        {
+            menu.Header();
+            do
+            {
+            Console.Write("Please enter email : ");
+            email = Console.ReadLine();
+            } while (!email.Contains("@") || string.IsNullOrEmpty(email));
+
+            
+        }
     }
 }
