@@ -18,8 +18,8 @@ class CustomerDB
         return _sqlconnection.QuerySingle<int>(sql);
     }
 
-    public List<Customer> GetCustomerByEmail()
+    public List<Customer> GetCustomerByEmail(Customer customer)
     {
-        return custList = _sqlconnection.Query<Customer>($"SELECT * FROM customers WHERE customers.email = 'apa123@mail.com';").ToList();
+        return custList = _sqlconnection.Query<Customer>($"SELECT * FROM customers WHERE customers.email = '{customer.Email}';").ToList();
     }
 }
