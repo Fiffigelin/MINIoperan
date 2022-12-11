@@ -12,4 +12,5 @@ class Reservation
         ShowDateId = showDateId;
         ShowId = showId;
     }
+    public Reservation (){}
 }

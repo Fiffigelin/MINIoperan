@@ -18,8 +18,40 @@ class CustomerDB
         return _sqlconnection.QuerySingle<int>(sql);
     }
 
-    public List<Customer> GetCustomerByEmail(Customer customer)
+    public Customer GetCustomerByEmail(Customer customer)
     {
-        return custList = _sqlconnection.Query<Customer>($"SELECT * FROM customers WHERE customers.email = '{customer.Email}';").ToList();
+        string sql = $"SELECT * FROM customers WHERE customers.email = '{customer.Email}'";
+        _sqlconnection.Open();
+        MySqlCommand cmd = new MySqlCommand(sql, _sqlconnection);
+        using (MySqlDataReader reader = cmd.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                customer.Id = Convert.ToInt32(reader["id"].ToString());
+                customer.FirstName = reader["first_name"].ToString();
+                customer.LastName = reader["last_name"].ToString();
+                customer.Email = reader["email"].ToString();
+                customer.Phonenumber = reader["phonenumber"].ToString();
+            }
+            _sqlconnection.Close();
+            return customer;
+        }
+    }
+
+    public Customer GetCustomerById(int customerId)
+    {
+        var customer = _sqlconnection.QuerySingle<Customer>($@"SELECT * FROM customers WHERE customers.id = '{customerId}'");
+        return customer;
+    }
+
+    public Customer InserCustomer(Customer customer)
+    {
+        string sql = ($@"
+        INSERT INTO customers (id, first_name, last_name, email, phonenumber) 
+        VALUES ('NULL', '{customer.FirstName}', '{customer.LastName}', '{customer.Email}', '{customer.Phonenumber}');
+        SELECT LAST_INSERT_ID();");
+
+        customer.Id = _sqlconnection.QuerySingle<int>(sql);
+        return customer;
     }
 }
