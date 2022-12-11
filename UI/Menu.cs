@@ -80,6 +80,8 @@ class Menu
                     break;
                 case ConsoleKey.Enter:
                     return objectInt;
+                case ConsoleKey.Q:
+                    return -1;
                 default:
                     break;
             }
@@ -93,7 +95,7 @@ class Menu
         while (true)
         {
             Header();
-
+            Console.WriteLine(showObjects.ElementAt(1).Title + "\n");
             foreach (var item in showObjects)
             {
                 if (item.DateTimeId == objectInt)
@@ -124,6 +126,8 @@ class Menu
                     break;
                 case ConsoleKey.Enter:
                     return objectInt;
+                case ConsoleKey.Q:
+                    return -1;
                 default:
                     break;
             }
@@ -133,7 +137,7 @@ class Menu
 
     private void Header()
     {
-        // Console.Clear();
+        Console.Clear();
         Console.WriteLine(@$"
                               ▄█▀      ▀█▄
                           ▄▀▀▓▀▄         ██▄  

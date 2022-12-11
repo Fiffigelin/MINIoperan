@@ -4,37 +4,27 @@ class ShowsUI
     public Menu menu = new();
     public List<Show> showTitle = new();
     public List<ShowToDates> showDates = new();
-    public int showId {get; set;}
+    public int showId { get; set; }
+    public int showDatesId { get; set; }
     public void ShowsMenu()
     {
         while (true)
         {
             showTitle = db.SelectShows();
             showId = menu.PrintMenuObjectTitle(showTitle);
+            if (showId == -1) break;
+            ShowsDateTime(showId);
+        }
+    }
 
-            switch(showId)
-            {
-                case 1:
-                    showDates = db.SelectSingleShowDate(showId);
-                    showId = menu.PrintMenuObjectDate(showDates);
-                    // Environment.Exit(0);
-                break;
-
-                case 2:
-                // cats
-                break;
-
-                case 3:
-                // star wars
-                break;
-
-                case 4:
-                // peter pan
-                break;
-
-                case 5:
-                return;
-            }
+    private int ShowsDateTime(int showId)
+    {
+        while (true)
+        {
+            // choose show and prints out dates and times
+            showDates = db.SelectSingleShowDate(showId);
+            showDatesId = menu.PrintMenuObjectDate(showDates);
+            return showDatesId;
         }
     }
 }
