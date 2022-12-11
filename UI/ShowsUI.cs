@@ -27,14 +27,15 @@ class ShowsUI
             if (showId == -1) break;
 
             // prints out available shows by date and time
+            Console.CursorVisible = false;
             ShowsDateTime(showId);
             if (showDatesId > 0) SeatsPerShow(showDatesId);
 
             // customer
             var logicItems = IsEmailExisting();
-            CustomerLogic(logicItems.Item1, logicItems.Item2);
+            if (logicItems.Item1 == true) CustomerLogic(logicItems.Item2);
             customer = logicItems.Item2;
-            if (IsEmailExisting().Item1 == false)
+            if (logicItems.Item1 == false)
             {
                 customer = CreateCustomer();
                 customer.Id = customerDB.InsertNewCustomer(customer);
@@ -100,27 +101,26 @@ class ShowsUI
         }
     }
 
-    private Reservation CustomerLogic(bool IsCustomerEmail, Customer customer)
+    private Reservation CustomerLogic(Customer customer)
     {
         while (true)
         {
             Console.CursorVisible = false;
-            if (IsCustomerEmail == true)
+            menu.Header();
+            Console.WriteLine($"Hi {customer.FirstName} {customer.LastName}, is this you?\nAnswer Y/N");
+            ConsoleKey key = Console.ReadKey(true).Key;
+
+            if (key == ConsoleKey.Y)
             {
-                Console.WriteLine($"Hi {customer.FirstName} {customer.LastName}, is this you?\nAnswer Y/N");
-                ConsoleKey key = Console.ReadKey(true).Key;
-                if (key == ConsoleKey.Y)
-                {
-                    menu.Header();
-                    Console.WriteLine($"Welcome back {customer.FirstName} {customer.LastName}");
-                    reservation.CustomerId = customer.Id;
-                    Console.ReadLine();
-                    return reservation;
-                }
-                else if (key == ConsoleKey.N)
-                {
-                    return reservation;
-                }
+                menu.Header();
+                Console.WriteLine($"Welcome back {customer.FirstName} {customer.LastName}");
+                reservation.CustomerId = customer.Id;
+                Console.ReadLine();
+                return reservation;
+            }
+            else if (key == ConsoleKey.N)
+            {
+                return reservation;
             }
         }
     }
@@ -138,22 +138,16 @@ class ShowsUI
             } while (string.IsNullOrEmpty(customer.FirstName));
             do
             {
-                Console.WriteLine($"Please enter your first name  : {customer.FirstName}");
                 Console.Write("Please enter your last name   : ");
                 customer.LastName = Console.ReadLine();
             } while (string.IsNullOrEmpty(customer.LastName));
             do
             {
-                Console.WriteLine($"Please enter your first name  : {customer.FirstName}");
-                Console.WriteLine($"Please enter your last name   : {customer.LastName}");
                 Console.Write("Please enter email            : ");
                 customer.Email = Console.ReadLine();
             } while (!customer.Email.Contains("@") || string.IsNullOrEmpty(customer.Email));
             do
             {
-                Console.WriteLine($"Please enter your first name  : {customer.FirstName}");
-                Console.WriteLine($"Please enter your last name   : {customer.LastName}");
-                Console.WriteLine($"Please enter your email       : {customer.LastName}");
                 Console.Write("Please enter your phonenumber : ");
                 customer.Phonenumber = Console.ReadLine();
                 isPhone = IsStringNumeric(customer.Phonenumber);

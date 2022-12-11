@@ -130,6 +130,7 @@ WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
                     }
                     break;
                 case ConsoleKey.Enter:
+                    Console.CursorVisible = false;
                     return objectInt;
                 case ConsoleKey.Q:
                     return -1;

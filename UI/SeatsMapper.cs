@@ -24,7 +24,7 @@ class SeatsMapper
         {
             menu.Header();
             Console.WriteLine("CHOOSE SEATS WITH 'A'. UNDO CHOOSEN SEAT WITH 'D'. MAKE RESERVATION WITH 'A'. RETURN WITH 'Q'.");
-            Console.WriteLine($"UserY = {UserY}, UserX = {UserX}");
+            // Console.WriteLine($"UserY = {UserY}, UserX = {UserX}"); // debugging
             PrintMatrix(availableSeats, userSeat, UserY, UserX);
 
             ConsoleKey key = Console.ReadKey().Key;
