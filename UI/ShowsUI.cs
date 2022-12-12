@@ -14,22 +14,25 @@ class ShowsUI
     public List<Customer> custList = new();
     public Reservation reservation = new();
     public ReservationDB reservDB = new();
-
-    public int showId { get; set; }
-    public int showDatesId { get; set; }
+    public bool Quite { get; set; }
+    public int ShowId { get; set; }
+    public int ShowDatesId { get; set; }
     public void ShowsMenu()
     {
         while (true)
         {
             // prints out available shows titles
-            showTitle = ShowDB.SelectShows();
-            showId = menu.PrintMenuObjectTitle(showTitle);
-            if (showId == -1) break;
+            ShowsTitle();
+            if (Quite == false) break;
 
             // prints out available shows by date and time
-            Console.CursorVisible = false;
-            ShowsDateTime(showId);
-            if (showDatesId > 0) SeatsPerShow(showDatesId);
+            ShowsDateTime(ShowId);
+            Console.WriteLine(ShowId);
+            Console.ReadLine();
+            if (Quite == false) break;
+
+            // choose seats
+            SeatsPerShow(ShowDatesId);
 
             // customer
             var logicItems = IsEmailExisting();
@@ -41,19 +44,31 @@ class ShowsUI
                 customer.Id = customerDB.InsertNewCustomer(customer);
             }
 
+            // debugging
             Console.WriteLine(customer.Id);
             Console.ReadLine();
+
+            // kom ihåg : ska göra reservationsbokning med säten och customers.id
+
+
         }
     }
-
-    private int ShowsDateTime(int showId)
+    private void ShowsTitle()
+    {
+        showTitle = ShowDB.SelectShows();
+        var showItem = menu.PrintMenuObjectTitle(showTitle);
+        ShowId = showItem.Item1;
+        Quite = showItem.Item2;
+    }
+    private void ShowsDateTime(int showId)
     {
         while (true)
         {
             // choose show and prints out dates and times
             showDates = ShowDB.SelectSingleShowDate(showId);
-            showDatesId = menu.PrintMenuObjectDate(showDates);
-            return showDatesId;
+            var showItem = menu.PrintMenuObjectDate(showDates);
+            ShowDatesId = showItem.Item1;
+            Quite = showItem.Item2;
         }
     }
 
@@ -64,10 +79,10 @@ class ShowsUI
         seatList = seatDB.GetAllSeats();
         seatMap.GetList(seatList);
 
-        Console.WriteLine(showDatesId);
-        Console.ReadLine();
         availableSeats = seatDB.AvailableSeats(showDatesId);
-        bookSeats = seatMap.AvailableSeats(availableSeats);
+        var seatsItem = seatMap.AvailableSeats(availableSeats);
+        bookSeats = seatsItem.Item1;
+        Quite = seatsItem.Item2;
     }
 
     private (bool, Customer) IsEmailExisting()
@@ -81,7 +96,7 @@ class ShowsUI
             do
             {
                 Console.Write("Please enter email : ");
-                customer.Email = Console.ReadLine();
+                customer.Email = Console.ReadLine()!;
             } while (!customer.Email.Contains("@") || string.IsNullOrEmpty(customer.Email));
 
             customer = customerDB.GetCustomerByEmail(customer);
@@ -134,22 +149,22 @@ class ShowsUI
             do
             {
                 Console.Write("Please enter your first name  : ");
-                customer.FirstName = Console.ReadLine();
+                customer.FirstName = Console.ReadLine()!;
             } while (string.IsNullOrEmpty(customer.FirstName));
             do
             {
                 Console.Write("Please enter your last name   : ");
-                customer.LastName = Console.ReadLine();
+                customer.LastName = Console.ReadLine()!;
             } while (string.IsNullOrEmpty(customer.LastName));
             do
             {
                 Console.Write("Please enter email            : ");
-                customer.Email = Console.ReadLine();
+                customer.Email = Console.ReadLine()!;
             } while (!customer.Email.Contains("@") || string.IsNullOrEmpty(customer.Email));
             do
             {
                 Console.Write("Please enter your phonenumber : ");
-                customer.Phonenumber = Console.ReadLine();
+                customer.Phonenumber = Console.ReadLine()!;
                 isPhone = IsStringNumeric(customer.Phonenumber);
             } while (string.IsNullOrEmpty(customer.Phonenumber) && isPhone == false);
 

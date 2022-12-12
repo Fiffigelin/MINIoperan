@@ -10,8 +10,9 @@ class SeatsMapper
         ConvertToMatrix();
     }
 
-    public List<int> AvailableSeats(List<Seat> availableSeats)
+    public (List<int>, bool) AvailableSeats(List<Seat> availableSeats)
     {
+        bool quite = false;
         List<int> userSeat = new();
         int maxX = seatMatrix.GetLength(0);
         int maxY = seatMatrix.GetLength(1);
@@ -23,7 +24,7 @@ class SeatsMapper
         while (true)
         {
             menu.Header();
-            Console.WriteLine("CHOOSE SEATS WITH 'A'. UNDO CHOOSEN SEAT WITH 'D'. MAKE RESERVATION WITH 'A'. RETURN WITH 'Q'.");
+            Console.WriteLine("CHOOSE SEATS WITH A, UNDO CHOOSEN SEAT WITH D. MAKE RESERVATION WITH ENTER. RETURN WITH Q.");
             // Console.WriteLine($"UserY = {UserY}, UserX = {UserX}"); // debugging
             PrintMatrix(availableSeats, userSeat, UserY, UserX);
 
@@ -65,8 +66,10 @@ class SeatsMapper
                     userSeat.Remove(seatMatrix[UserY, UserX]);
                     break;
                 case ConsoleKey.Enter:
-                    Console.CursorVisible = true;
-                    return userSeat;
+                    quite = true;
+                    return (userSeat, quite);
+                case ConsoleKey.Q:
+                    return (userSeat, quite);
                 default:
                     break;
             }

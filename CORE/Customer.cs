@@ -8,6 +8,8 @@ public class Customer
 
     public Customer (string firstName, string lastName, string mail, string phonenr)
     {
+        FirstName = firstName;
+        LastName = LastName;
         Email = mail;
         Phonenumber = phonenr;
     }

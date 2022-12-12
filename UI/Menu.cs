@@ -44,9 +44,10 @@ class Menu
         }
     }
 
-    public int PrintMenuObjectTitle(List<Show> showObjects)
+    public (int, bool) PrintMenuObjectTitle(List<Show> showObjects)
     {
-        int objectInt = 1;
+        bool quite = false;
+        int objectInt = showObjects.ElementAt(0).Id;
         while (true)
         {
             Header();
@@ -80,9 +81,10 @@ class Menu
                     }
                     break;
                 case ConsoleKey.Enter:
-                    return objectInt;
+                    quite = true;
+                    return (objectInt, quite);
                 case ConsoleKey.Q:
-                    return -1;
+                    return (0, quite);
                 default:
                     break;
             }
@@ -90,9 +92,11 @@ class Menu
         }
     }
 
-    public int PrintMenuObjectDate(List<ShowToDates> showObjects)
+    public (int, bool) PrintMenuObjectDate(List<ShowToDates> showObjects)
     {
-        int objectInt = 1;
+        bool quite = false;
+        int objectInt = showObjects.ElementAt(0).DateTimeId;
+        int objectCount = objectInt + showObjects.Count -1;
         while (true)
         {
             Header();
@@ -100,6 +104,7 @@ class Menu
 WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
 
 {showObjects.ElementAt(1).Title}");
+Console.WriteLine("objectInt : " + objectInt);
 
             foreach (var item in showObjects)
             {
@@ -111,29 +116,31 @@ WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
                 Console.ResetColor();
             }
 
+            Console.WriteLine("objectInt : " + objectInt);
+            Console.WriteLine("objectCount : " +objectCount);
             Console.CursorVisible = false;
             ConsoleKey key = Console.ReadKey().Key;
             switch (key)
             {
                 case ConsoleKey.DownArrow:
                     objectInt++;
-                    if (objectInt > showObjects.Count)
+                    if (objectInt > objectCount)
                     {
-                        objectInt = 1;
+                        objectInt = showObjects.ElementAt(0).DateTimeId;
                     }
                     break;
                 case ConsoleKey.UpArrow:
                     objectInt--;
-                    if (objectInt < 1)
+                    if (objectInt < showObjects.ElementAt(0).DateTimeId)
                     {
-                        objectInt = showObjects.Count;
+                        objectInt = objectCount;
                     }
                     break;
                 case ConsoleKey.Enter:
-                    Console.CursorVisible = false;
-                    return objectInt;
+                    quite = true;
+                    return (objectInt, quite);
                 case ConsoleKey.Q:
-                    return -1;
+                    return (0, quite);
                 default:
                     break;
             }
