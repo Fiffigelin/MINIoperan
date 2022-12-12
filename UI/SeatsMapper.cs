@@ -10,10 +10,11 @@ class SeatsMapper
         ConvertToMatrix();
     }
 
-    public (List<int>, bool) AvailableSeats(List<Seat> availableSeats)
+    public (List<Seat>, bool) AvailableSeats(List<Seat> availableSeats)
     {
         bool quit = true;
-        List<int> userSeat = new();
+        Seat bookSeat = new();
+        List<Seat> userSeat = new();
         int maxX = seatMatrix.GetLength(0);
         int maxY = seatMatrix.GetLength(1);
         int UserY = 0;
@@ -60,20 +61,34 @@ class SeatsMapper
                     }
                     break;
                 case ConsoleKey.A:
-                    if (VerifyBooking(availableSeats, userSeat, seatMatrix[UserY, UserX]) == true)
+                    var addSeat = VerifySeat(availableSeats, userSeat, seatMatrix[UserY, UserX]);
+                    if (addSeat.Item1 == true)
                     {
-                        Console.WriteLine($"Booking seat : {seatMatrix[UserY, UserX]}");
+                        Console.WriteLine($"Booking seat : {addSeat.Item2.Id}");
                         Console.ReadLine();
-                        userSeat.Add(seatMatrix[UserY, UserX]);
+                        userSeat.Add(addSeat.Item2);
+                        break;
                     }
                     else
                     {
-                        Console.WriteLine($"Unable to book seat : {seatMatrix[UserY, UserX]}");
+                        Console.WriteLine($"Unable to book seat : {addSeat.Item2.Id}");
                         Console.ReadLine();
                     }
                     break;
                 case ConsoleKey.D:
-                    userSeat.Remove(seatMatrix[UserY, UserX]);
+                    var deleteSeat = DeleteSeat(availableSeats, userSeat, seatMatrix[UserY, UserX]);
+                    if (deleteSeat.Item1 == true)
+                    {
+                        Console.WriteLine($"Deleted seat : {deleteSeat.Item2.Id}");
+                        Console.ReadLine();
+                        userSeat.Remove(deleteSeat.Item2);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Nothing to delete");
+                        Console.ReadLine();
+                    }
                     break;
                 case ConsoleKey.Enter:
                     quit = false;
@@ -87,7 +102,7 @@ class SeatsMapper
         }
     }
 
-    private void PrintMatrix(List<Seat> availableSeats, List<int> userSeat, int UserY, int UserX)
+    private void PrintMatrix(List<Seat> availableSeats, List<Seat> userSeat, int UserY, int UserX)
     {
         bool IsSeatAvailable = false;
         bool IsSeatChoosen = false;
@@ -101,12 +116,15 @@ class SeatsMapper
                     if (matrix[i, j] == seat.Id)
                     {
                         IsSeatAvailable = true;
+                        break;
+                    }
+                }
 
-                        if ((userSeat.Contains(seat.Id)))
-                        {
-                            IsSeatChoosen = true;
-                            break;
-                        }
+                foreach (var uSeat in userSeat)
+                {
+                    if (uSeat.Id == matrix[i, j])
+                    {
+                        IsSeatChoosen = true;
                         break;
                     }
                 }
@@ -116,18 +134,19 @@ class SeatsMapper
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     IsSeatAvailable = false;
-
-                    // print out blue when choosen for booking
-                    if (IsSeatChoosen == true)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        IsSeatChoosen = false;
-                    }
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                 }
+                
+                // print out blue when choosen for booking
+                if (IsSeatChoosen == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    IsSeatChoosen = false;
+                }
+                
 
 
                 if (UserY == i && UserX == j)
@@ -146,23 +165,41 @@ class SeatsMapper
         Console.ResetColor();
     }
 
-    private bool VerifyBooking(List<Seat> availableSeats, List<int> userSeat, int seatNumber)
+    private (bool, Seat) VerifySeat(List<Seat> availableSeats, List<Seat> userSeat, int seatNumber)
     {
+        Seat insertSeat = new();
         foreach (var seat in userSeat)
         {
-            if (seat == seatNumber)
+            if (seat.Id == seatNumber)
             {
-                return false;
+                return (false, seat);
             }
         }
         foreach (var seat in availableSeats)
         {
             if (seat.Id == seatNumber)
             {
-                return true;
+                insertSeat = seat;
+                Console.WriteLine($"seat : {seat.Id} Seatnr : {seatNumber}");
+                Console.ReadLine();
+                return (true, insertSeat);
             }
         }
-        return false;
+        return (false, insertSeat);
+    }
+
+    private (bool, Seat) DeleteSeat(List<Seat> availableSeats, List<Seat> userSeat, int seatNumber)
+    {
+        Seat deleteSeat = new();
+        foreach (var seat in userSeat)
+        {
+            if (seat.Id == seatNumber)
+            {
+                deleteSeat = seat;
+                return (true, deleteSeat);
+            }
+        }
+        return (false, deleteSeat);
     }
 
     // convert objects from list to elements in a dynamic array

@@ -8,7 +8,7 @@ class ShowsUI
     public SeatsMapper seatMap = new();
     public List<Seat> seatList = new();
     public List<Seat> availableSeats = new();
-    public List<int> bookSeats = new();
+    public List<Seat> bookSeats = new();
     public Customer customer;
     public CustomerDB customerDB = new();
     public List<Customer> custList = new();
@@ -34,7 +34,7 @@ class ShowsUI
             if (Quit == true) continue;
 
             // customer
-            EmailDatabase();
+            IsEmailInDatabase();
 
             // debugging
             Console.WriteLine(customer.Id);
@@ -45,7 +45,12 @@ class ShowsUI
 
         }
     }
-    private void EmailDatabase()
+
+    private void MakeReservation()
+    {
+
+    }
+    private void IsEmailInDatabase()
     {
         var logicItems = IsEmailExisting();
         Quit = logicItems.Item1;
