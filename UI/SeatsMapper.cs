@@ -76,37 +76,6 @@ class SeatsMapper
             Console.Clear();
         }
     }
-    // convert objects from list to elements in a dynamic array
-    private void ConvertToMatrix()
-    {
-        int x = 0;
-        int y = 0;
-
-        foreach (var item in seatList)
-        {
-            if (item.Row == 1)
-            {
-                x++;
-            }
-            if (item.Row > y)
-            {
-                y++;
-            }
-        }
-        int[,] matrix = new int[y, x];
-        x = 0;
-        y = 0;
-
-        foreach (var item in seatList)
-        {
-            if (x >= matrix.GetLength(1)) x = 0;
-            y = item.Row - 1;
-
-            matrix[y, x] = item.Id;
-            x++;
-        }
-        seatMatrix = matrix;
-    }
 
     private void PrintMatrix(List<Seat> availableSeats, List<int> userSeat, int UserY, int UserX)
     {
@@ -165,5 +134,75 @@ class SeatsMapper
             Console.Write(Environment.NewLine);
         }
         Console.ResetColor();
+    }
+
+    private void VerifyBooking(List<Seat> availableSeats, List<int> userSeat)
+    {
+        bool IsSeatAvailable = false;
+        bool IsSeatChoosen = false;
+        int[,] matrix = seatMatrix;
+        for (int i = 0; i < matrix.GetLength(0); i++)
+        {
+            for (int j = 0; j < matrix.GetLength(1); j++)
+            {
+                foreach (var seat in availableSeats)
+                {
+                    if (matrix[i, j] == seat.Id)
+                    {
+                        IsSeatAvailable = true;
+
+                        if ((userSeat.Contains(seat.Id)))
+                        {
+                            IsSeatChoosen = true;
+                        }
+                    }
+
+                    if (IsSeatAvailable == false && IsSeatChoosen == true)
+                    {
+                        
+                    }
+                }
+
+                if (IsSeatAvailable == true && IsSeatChoosen == true)
+                {
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                }
+            }
+        }
+    }
+
+    // convert objects from list to elements in a dynamic array
+    private void ConvertToMatrix()
+    {
+        int x = 0;
+        int y = 0;
+
+        foreach (var item in seatList)
+        {
+            if (item.Row == 1)
+            {
+                x++;
+            }
+            if (item.Row > y)
+            {
+                y++;
+            }
+        }
+        int[,] matrix = new int[y, x];
+        x = 0;
+        y = 0;
+
+        foreach (var item in seatList)
+        {
+            if (x >= matrix.GetLength(1)) x = 0;
+            y = item.Row - 1;
+
+            matrix[y, x] = item.Id;
+            x++;
+        }
+        seatMatrix = matrix;
     }
 }
