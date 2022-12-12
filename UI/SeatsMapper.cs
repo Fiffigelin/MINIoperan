@@ -28,7 +28,7 @@ class SeatsMapper
             // Console.WriteLine($"UserY = {UserY}, UserX = {UserX}"); // debugging
             PrintMatrix(availableSeats, userSeat, UserY, UserX);
 
-            ConsoleKey key = Console.ReadKey().Key;
+            ConsoleKey key = Console.ReadKey(true).Key;
             switch (key)
             {
                 case ConsoleKey.DownArrow:
@@ -60,7 +60,17 @@ class SeatsMapper
                     }
                     break;
                 case ConsoleKey.A:
-                    userSeat.Add(seatMatrix[UserY, UserX]);
+                    if (VerifyBooking(availableSeats, userSeat, seatMatrix[UserY, UserX]) == true)
+                    {
+                        Console.WriteLine($"Booking seat : {seatMatrix[UserY, UserX]}");
+                        Console.ReadLine();
+                        userSeat.Add(seatMatrix[UserY, UserX]);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Unable to book seat : {seatMatrix[UserY, UserX]}");
+                        Console.ReadLine();
+                    }
                     break;
                 case ConsoleKey.D:
                     userSeat.Remove(seatMatrix[UserY, UserX]);
@@ -136,42 +146,23 @@ class SeatsMapper
         Console.ResetColor();
     }
 
-    private void VerifyBooking(List<Seat> availableSeats, List<int> userSeat)
+    private bool VerifyBooking(List<Seat> availableSeats, List<int> userSeat, int seatNumber)
     {
-        bool IsSeatAvailable = false;
-        bool IsSeatChoosen = false;
-        int[,] matrix = seatMatrix;
-        for (int i = 0; i < matrix.GetLength(0); i++)
+        foreach (var seat in userSeat)
         {
-            for (int j = 0; j < matrix.GetLength(1); j++)
+            if (seat == seatNumber)
             {
-                foreach (var seat in availableSeats)
-                {
-                    if (matrix[i, j] == seat.Id)
-                    {
-                        IsSeatAvailable = true;
-
-                        if ((userSeat.Contains(seat.Id)))
-                        {
-                            IsSeatChoosen = true;
-                        }
-                    }
-
-                    if (IsSeatAvailable == false && IsSeatChoosen == true)
-                    {
-                        
-                    }
-                }
-
-                if (IsSeatAvailable == true && IsSeatChoosen == true)
-                {
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                }
+                return false;
             }
         }
+        foreach (var seat in availableSeats)
+        {
+            if (seat.Id == seatNumber)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     // convert objects from list to elements in a dynamic array
