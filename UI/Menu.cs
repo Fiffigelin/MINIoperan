@@ -46,7 +46,7 @@ class Menu
 
     public (int, bool) PrintMenuObjectTitle(List<Show> showObjects)
     {
-        bool quite = false;
+        bool quit = true;
         int objectInt = showObjects.ElementAt(0).Id;
         while (true)
         {
@@ -81,10 +81,10 @@ class Menu
                     }
                     break;
                 case ConsoleKey.Enter:
-                    quite = true;
-                    return (objectInt, quite);
+                    quit = false;
+                    return (objectInt, quit);
                 case ConsoleKey.Q:
-                    return (0, quite);
+                    return (0, quit);
                 default:
                     break;
             }
@@ -94,7 +94,7 @@ class Menu
 
     public (int, bool) PrintMenuObjectDate(List<ShowToDates> showObjects)
     {
-        bool quite = false;
+        bool quit = true;
         int objectInt = showObjects.ElementAt(0).DateTimeId;
         int objectCount = objectInt + showObjects.Count -1;
         while (true)
@@ -137,10 +137,10 @@ Console.WriteLine("objectInt : " + objectInt);
                     }
                     break;
                 case ConsoleKey.Enter:
-                    quite = true;
-                    return (objectInt, quite);
+                    quit = false;
+                    return (objectInt, quit);
                 case ConsoleKey.Q:
-                    return (0, quite);
+                    return (0, quit);
                 default:
                     break;
             }

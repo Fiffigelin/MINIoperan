@@ -14,7 +14,7 @@ class ShowsUI
     public List<Customer> custList = new();
     public Reservation reservation = new();
     public ReservationDB reservDB = new();
-    public bool Quite { get; set; }
+    public bool Quit { get; set; }
     public int ShowId { get; set; }
     public int ShowDatesId { get; set; }
     public void ShowsMenu()
@@ -23,26 +23,18 @@ class ShowsUI
         {
             // prints out available shows titles
             ShowsTitle();
-            if (Quite == false) break;
+            if (Quit == true) break;
 
             // prints out available shows by date and time
             ShowsDateTime(ShowId);
-            Console.WriteLine(ShowId);
-            Console.ReadLine();
-            if (Quite == false) break;
+            if (Quit == true) continue;
 
             // choose seats
             SeatsPerShow(ShowDatesId);
+            if (Quit == true) continue;
 
             // customer
-            var logicItems = IsEmailExisting();
-            if (logicItems.Item1 == true) CustomerLogic(logicItems.Item2);
-            customer = logicItems.Item2;
-            if (logicItems.Item1 == false)
-            {
-                customer = CreateCustomer();
-                customer.Id = customerDB.InsertNewCustomer(customer);
-            }
+            EmailDatabase();
 
             // debugging
             Console.WriteLine(customer.Id);
@@ -53,23 +45,33 @@ class ShowsUI
 
         }
     }
+    private void EmailDatabase()
+    {
+        var logicItems = IsEmailExisting();
+        Quit = logicItems.Item1;
+        customer = logicItems.Item2;
+        
+        if (Quit == true) CustomerLogic(customer);
+        else
+        {
+            customer = CreateCustomer();
+            customer.Id = customerDB.InsertNewCustomer(customer);
+        }
+    }
     private void ShowsTitle()
     {
         showTitle = ShowDB.SelectShows();
         var showItem = menu.PrintMenuObjectTitle(showTitle);
         ShowId = showItem.Item1;
-        Quite = showItem.Item2;
+        Quit = showItem.Item2;
     }
     private void ShowsDateTime(int showId)
     {
-        while (true)
-        {
             // choose show and prints out dates and times
             showDates = ShowDB.SelectSingleShowDate(showId);
             var showItem = menu.PrintMenuObjectDate(showDates);
             ShowDatesId = showItem.Item1;
-            Quite = showItem.Item2;
-        }
+            Quit = showItem.Item2;
     }
 
     // ska returnera en lista med int
@@ -82,7 +84,7 @@ class ShowsUI
         availableSeats = seatDB.AvailableSeats(showDatesId);
         var seatsItem = seatMap.AvailableSeats(availableSeats);
         bookSeats = seatsItem.Item1;
-        Quite = seatsItem.Item2;
+        Quit = seatsItem.Item2;
     }
 
     private (bool, Customer) IsEmailExisting()

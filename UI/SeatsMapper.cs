@@ -12,7 +12,7 @@ class SeatsMapper
 
     public (List<int>, bool) AvailableSeats(List<Seat> availableSeats)
     {
-        bool quite = false;
+        bool quit = true;
         List<int> userSeat = new();
         int maxX = seatMatrix.GetLength(0);
         int maxY = seatMatrix.GetLength(1);
@@ -66,10 +66,10 @@ class SeatsMapper
                     userSeat.Remove(seatMatrix[UserY, UserX]);
                     break;
                 case ConsoleKey.Enter:
-                    quite = true;
-                    return (userSeat, quite);
+                    quit = false;
+                    return (userSeat, quit);
                 case ConsoleKey.Q:
-                    return (userSeat, quite);
+                    return (userSeat, quit);
                 default:
                     break;
             }
