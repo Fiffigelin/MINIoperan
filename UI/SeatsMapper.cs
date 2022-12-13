@@ -139,14 +139,14 @@ class SeatsMapper
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                 }
-                
+
                 // print out blue when choosen for booking
                 if (IsSeatChoosen == true)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
                     IsSeatChoosen = false;
                 }
-                
+
 
 
                 if (UserY == i && UserX == j)

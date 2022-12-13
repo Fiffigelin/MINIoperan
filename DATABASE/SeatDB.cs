@@ -21,4 +21,9 @@ class SeatDB
         WHERE seats.id NOT IN 
         (select seats_to_reservations.seats_id FROM seats_to_reservations WHERE seats_to_reservations.shows_dates_id = '{dateId}')").ToList();
     }
+
+    public Seat GetSeatById(int seatId)
+    {
+        return _sqlconnection.QuerySingle<Seat>($@"SELECT * FROM seats WHERE seats.id = '{seatId}';");
+    }
 }

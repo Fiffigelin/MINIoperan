@@ -34,7 +34,7 @@ class UI
             if (Quit == true) continue;
 
             // customer
-            CheckingCustomer();
+            MakeReservation();
 
             // debugging
             Console.WriteLine(customer.Id);
@@ -48,12 +48,32 @@ class UI
 
     private void MakeReservation()
     {
+        CheckingCustomer();
+        GetSeatInfo();
+        CalculateTotalPrice();
+    }
 
+    public void SeatRender()
+    {
+        reservation.Id = reservDB.InsertReservation(reservation);
+        foreach (var seat in bookSeats)
+        {
+            
+        }
+    }
+    public void GetSeatInfo()
+    {
+        seatList.Clear();
+        foreach (var seat in bookSeats)
+        {
+            Seat bSeat = seatDB.GetSeatById(seat.Id);
+            seatList.Add(bSeat);
+        }
     }
     private void CalculateTotalPrice()
     {
         int totalCost = 0;
-        foreach (var seat in bookSeats)
+        foreach (var seat in seatList)
         {
             totalCost += seat.Price;
         }
@@ -79,6 +99,7 @@ class UI
         showTitle = ShowDB.SelectShows();
         var showItem = menu.PrintMenuObjectTitle(showTitle);
         ShowId = showItem.Item1;
+        reservation.ShowId = showItem.Item1;
         Quit = showItem.Item2;
     }
     private void ShowsDateTime(int showId)
@@ -87,6 +108,7 @@ class UI
             showDates = ShowDB.SelectSingleShowDate(showId);
             var showItem = menu.PrintMenuObjectDate(showDates);
             ShowDatesId = showItem.Item1;
+            reservation.ShowDateId = ShowDatesId;
             Quit = showItem.Item2;
     }
 
@@ -141,7 +163,7 @@ class UI
             Console.CursorVisible = false;
             menu.Header();
             Console.WriteLine($"Hi {customer.FirstName} {customer.LastName}, is this you?\nAnswer Y/N");
-            ConsoleKey key = Console.ReadKey(true).Key;
+            ConsoleKey key = Console.ReadKey(false).Key;
 
             if (key == ConsoleKey.Y)
             {
