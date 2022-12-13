@@ -6,7 +6,7 @@
         List<Show> show = new();
         show = db.SelectShows();
         
-        ShowsUI showUI = new();
+        UI showUI = new();
         showUI.ShowsMenu();
 
         //----------------------------------Skriver ut showerna med id-----------------------------------

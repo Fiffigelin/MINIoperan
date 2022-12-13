@@ -22,8 +22,3 @@ class SeatDB
         (select seats_to_reservations.seats_id FROM seats_to_reservations WHERE seats_to_reservations.shows_dates_id = '{dateId}')").ToList();
     }
 }
-
-
-// SELECT seats.id FROM seats
-// UNION
-// SELECT seats_to_reservations.seats_id FROM seats_to_reservations WHERE seats_to_reservations.seats_id NOT IN (SELECT seats_to_reservations.seats_id WHERE seats_to_reservations.shows_dates_id = '17');

@@ -1,4 +1,4 @@
-class ShowsUI
+class UI
 {
     public Menu menu = new();
     public ShowDB ShowDB = new();
@@ -34,7 +34,7 @@ class ShowsUI
             if (Quit == true) continue;
 
             // customer
-            IsEmailInDatabase();
+            CheckingCustomer();
 
             // debugging
             Console.WriteLine(customer.Id);
@@ -50,17 +50,28 @@ class ShowsUI
     {
 
     }
-    private void IsEmailInDatabase()
+    private void CalculateTotalPrice()
+    {
+        int totalCost = 0;
+        foreach (var seat in bookSeats)
+        {
+            totalCost += seat.Price;
+        }
+
+        reservation.Price = totalCost;
+    }
+    private void CheckingCustomer()
     {
         var logicItems = IsEmailExisting();
         Quit = logicItems.Item1;
         customer = logicItems.Item2;
         
-        if (Quit == true) CustomerLogic(customer);
+        if (Quit == true) reservation = CustomerLogic(customer);
         else
         {
             customer = CreateCustomer();
             customer.Id = customerDB.InsertNewCustomer(customer);
+            reservation.CustomerId = customer.Id;
         }
     }
     private void ShowsTitle()
