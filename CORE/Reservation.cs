@@ -6,8 +6,9 @@ class Reservation
     public int ShowId {get; set;}
     public int Price {get; set;}
 
-    public Reservation (int customerId, int showDateId, int showId)
+    public Reservation (int id, int customerId, int showDateId, int showId)
     {
+        Id = id;
         CustomerId = customerId;
         ShowDateId = showDateId;
         ShowId = showId;

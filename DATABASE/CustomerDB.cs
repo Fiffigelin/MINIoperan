@@ -38,10 +38,25 @@ class CustomerDB
         }
     }
 
-    public Customer GetCustomerById(int customerId)
+    public Customer GetCustomerById(Reservation reservation)
     {
-        var customer = _sqlconnection.QuerySingle<Customer>($@"SELECT * FROM customers WHERE customers.id = '{customerId}'");
-        return customer;
+        Customer customer = new();
+        string sql = $"SELECT * FROM customers WHERE customers.id = '{reservation.CustomerId}'";
+        _sqlconnection.Open();
+        MySqlCommand cmd = new MySqlCommand(sql, _sqlconnection);
+        using (MySqlDataReader reader = cmd.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                customer.Id = Convert.ToInt32(reader["id"].ToString());
+                customer.FirstName = reader["first_name"].ToString();
+                customer.LastName = reader["last_name"].ToString();
+                customer.Email = reader["email"].ToString();
+                customer.Phonenumber = reader["phonenumber"].ToString();
+            }
+            _sqlconnection.Close();
+            return customer;
+        }
     }
 
     public Customer InserCustomer(Customer customer)

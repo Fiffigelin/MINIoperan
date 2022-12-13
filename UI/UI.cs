@@ -36,10 +36,68 @@ class UI
 
             // customer
             MakeReservation();
+        }
+    }
 
-            // kom ihåg : ska göra reservationsbokning med säten och customers.id
+    private void PrintReceipt()
+    {
+        reservation = reservDB.SelectSingleReservation(reservation.Id);
+        customer = customerDB.GetCustomerById(reservation);
+        var classObjects = reservDB.SelectReceiptInfo(reservation);
+        seatList = classObjects.Item1;
+        ShowToDates showDates = classObjects.Item2;
 
+        foreach (var seat in seatList)
+        {
+            PrintLine();
+            PrintRow("Name", customer.FirstName + " " + customer.LastName);
+            PrintLine();
+            PrintRow("Show", showDates.Title);
+            PrintLine();
+            PrintRow("Date", showDates.Date.ToString("yyyy-MM-dd"));
+            PrintLine();
+            PrintRow("Time", showDates.Time.ToString());
+            PrintLine();
+            PrintRow("Section", seat.Section);
+            PrintRow("Row", seat.Row.ToString());
+            PrintRow("Seat", seat.Id.ToString());
+            PrintRow("Price", seat.Price.ToString());
+            PrintLine();
+            Console.Write($"\n\n");
+        }
+        Console.ReadLine();
 
+    }
+
+    private void PrintLine()
+    {
+        Console.WriteLine(new string('-', 75));
+    }
+
+    private void PrintRow(params string[] columns)
+    {
+        int width = (75 - columns.Length) / columns.Length;
+        string row = "|";
+
+        foreach (string column in columns)
+        {
+            row += AlignCentre(column, width) + "|";
+        }
+
+        Console.WriteLine(row);
+    }
+
+    private string AlignCentre(string text, int width = 75)
+    {
+        text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
+
+        if (string.IsNullOrEmpty(text))
+        {
+            return new string(' ', width);
+        }
+        else
+        {
+            return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
         }
     }
 
@@ -49,6 +107,7 @@ class UI
         GetSeatInfo();
         CalculateTotalPrice();
         SeatRender();
+        PrintReceipt();
     }
 
     public void SeatRender()
@@ -84,10 +143,11 @@ class UI
     }
     private void CheckingCustomer()
     {
+        Console.CursorVisible = false;
         var logicItems = IsEmailExisting();
         Quit = logicItems.Item1;
         customer = logicItems.Item2;
-        
+
         if (Quit == true) reservation = CustomerLogic(customer);
         else
         {
@@ -106,12 +166,12 @@ class UI
     }
     private void ShowsDateTime(int showId)
     {
-            // choose show and prints out dates and times
-            showDates = ShowDB.SelectSingleShowDate(showId);
-            var showItem = menu.PrintMenuObjectDate(showDates);
-            ShowDatesId = showItem.Item1;
-            reservation.ShowDateId = ShowDatesId;
-            Quit = showItem.Item2;
+        // choose show and prints out dates and times
+        showDates = ShowDB.SelectSingleShowDate(showId);
+        var showItem = menu.PrintMenuObjectDate(showDates);
+        ShowDatesId = showItem.Item1;
+        reservation.ShowDateId = ShowDatesId;
+        Quit = showItem.Item2;
     }
 
     // ska returnera en lista med int

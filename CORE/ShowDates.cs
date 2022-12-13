@@ -20,4 +20,6 @@ class ShowToDates
         Date = Convert.ToDateTime(date);
         Time = TimeOnly.Parse(time);
     }
+
+    public ShowToDates(){}
 }
