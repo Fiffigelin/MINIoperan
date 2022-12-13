@@ -14,6 +14,7 @@ class UI
     public List<Customer> custList = new();
     public Reservation reservation = new();
     public ReservationDB reservDB = new();
+    public SeatRender seatRender = new();
     public bool Quit { get; set; }
     public int ShowId { get; set; }
     public int ShowDatesId { get; set; }
@@ -36,10 +37,6 @@ class UI
             // customer
             MakeReservation();
 
-            // debugging
-            Console.WriteLine(customer.Id);
-            Console.ReadLine();
-
             // kom ihåg : ska göra reservationsbokning med säten och customers.id
 
 
@@ -51,14 +48,19 @@ class UI
         CheckingCustomer();
         GetSeatInfo();
         CalculateTotalPrice();
+        SeatRender();
     }
 
     public void SeatRender()
     {
-        reservation.Id = reservDB.InsertReservation(reservation);
-        foreach (var seat in bookSeats)
+        reservation = reservDB.InsertReservation(reservation);
+
+        foreach (var seat in seatList)
         {
-            
+            seatRender.SeatId = seat.Id;
+            seatRender.ReservationId = reservation.Id;
+            seatRender.ShowDateId = reservation.ShowDateId;
+            seatDB.SeatToReservation(seatRender);
         }
     }
     public void GetSeatInfo()

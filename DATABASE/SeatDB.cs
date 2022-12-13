@@ -26,4 +26,12 @@ class SeatDB
     {
         return _sqlconnection.QuerySingle<Seat>($@"SELECT * FROM seats WHERE seats.id = '{seatId}';");
     }
+
+    public void SeatToReservation(SeatRender seatRender)
+    {
+        string sql = ($@"INSERT INTO seats_to_reservations (seats_id, reservation_id, shows_dates_id) 
+        VALUES ('{seatRender.SeatId}', '{seatRender.ReservationId}', '{seatRender.ShowDateId}');");
+
+        _sqlconnection.Execute(sql);
+    }
 }
