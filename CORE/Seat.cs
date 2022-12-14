@@ -4,15 +4,4 @@ class Seat
     public string Section {get; set;}
     public int Row {get; set;}
     public int Price {get; set;}
-
-
-    public Seat (){}
-
-    public Seat (int id, string section, int row, int price)
-    {
-        Id = id;
-        Section = section;
-        Row = row;
-        Price = price;
-    }
 }
