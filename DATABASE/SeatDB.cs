@@ -5,7 +5,8 @@ class SeatDB
     MySqlConnection _sqlconnection;
     public SeatDB()
     {
-        _sqlconnection = new MySqlConnection("Server = localhost;Database = test_operan;Uid=root");
+        SQLConnection connection = new();
+        _sqlconnection = connection.ConnectDatabase();
     }
 
     public List<Seat> GetAllSeats()

@@ -7,7 +7,8 @@ class CustomerDB
     MySqlConnection _sqlconnection;
     public CustomerDB()
     {
-        _sqlconnection = new MySqlConnection("Server = localhost;Database = test_operan;Uid=root");
+        SQLConnection connection = new();
+        _sqlconnection = connection.ConnectDatabase();
     }
 
     public int InsertNewCustomer(Customer customer)

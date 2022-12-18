@@ -6,7 +6,8 @@ class ShowDB
     MySqlConnection _sqlconnection;
     public ShowDB()
     {
-        _sqlconnection = new MySqlConnection("Server = localhost;Database = test_operan;Uid=root");
+        SQLConnection connection = new();
+        _sqlconnection = connection.ConnectDatabase();
     }
 
     public List<Show> SelectShowTitle()
