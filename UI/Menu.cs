@@ -1,6 +1,8 @@
+using System.Globalization;
+using System.Collections;
 class Menu
 {
-    UI ui = new ();
+    UI ui = new();
     public (Show, bool) PrintMenuObjectTitle(List<Show> showObjects)
     {
         Show show = new();
@@ -56,6 +58,7 @@ class Menu
 
     public (int, bool) PrintMenuObjectDate(List<ShowToDates> showObjects)
     {
+        CultureInfo eng = new("en-EN");
         bool quit = true;
         int objectInt = showObjects.ElementAt(0).DateTimeId;
         int objectCount = objectInt + showObjects.Count - 1;
@@ -69,11 +72,14 @@ WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
 
             foreach (var item in showObjects)
             {
+                DateTime day = item.Date;
+                // https://learn.microsoft.com/en-us/dotnet/standard/base-types/how-to-extract-the-day-of-the-week-from-a-specific-date
+                Console.Write(item.Date.ToString("ddd", eng));
                 if (item.DateTimeId == objectInt)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                 }
-                Console.WriteLine(item.Date.ToString("yyyy-MM-dd") + " " + item.Time);
+                Console.Write(" : " + item.Date.ToString("yyyy-MM-dd") + " " + item.Time + "\n");
                 Console.ResetColor();
             }
 

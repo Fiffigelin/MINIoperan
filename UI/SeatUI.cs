@@ -183,8 +183,6 @@ class SeatUI
             if (seat.Id == seatNumber)
             {
                 insertSeat = seat;
-                Console.WriteLine($"seat : {seat.Id} Seatnr : {seatNumber}");
-                Console.ReadLine();
                 return (true, insertSeat);
             }
         }
