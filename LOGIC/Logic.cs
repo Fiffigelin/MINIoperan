@@ -6,15 +6,15 @@ class Logic
     List<Seat> bookSeats = new();
     ShowDB showDB = new();
     SeatDB seatDB = new();
-    public SeatRender seatRender = new();
+    SeatRender seatRender = new();
     Reservation reservation = new();
     ReservationDB reservationDB = new();
     Menu menu = new();
-
     Customer customer = new();
     CustomerDB customerDB = new();
     UI ui = new();
     SeatUI seatui = new();
+    TicketUI ticketui = new();
 
     public bool ShowsTitle()
     {
@@ -59,7 +59,7 @@ class Logic
         GetSeatInfo();
         CalculateTotalPrice();
         SeatRender();
-        ui.PrintTickets(reservation, customer, seatList, GetInfoForTickets());  
+        ticketui.PrintTickets(reservation, customer, seatList, GetInfoForTickets());  
     }
     
     private (bool, Customer) SearchForEmail(string email)
