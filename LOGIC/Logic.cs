@@ -9,6 +9,7 @@ class Logic
     public SeatRender seatRender = new();
     Reservation reservation = new();
     ReservationDB reservationDB = new();
+    Menu menu = new();
 
     Customer customer = new();
     CustomerDB customerDB = new();
@@ -17,7 +18,7 @@ class Logic
     public bool ShowsTitle()
     {
         showTitle = showDB.SelectShows();
-        var showItem = ui.PrintMenuObjectTitle(showTitle);
+        var showItem = menu.PrintMenuObjectTitle(showTitle);
         reservation.ShowId = showItem.Item1.Id;
         return showItem.Item2;
     }
@@ -25,7 +26,7 @@ class Logic
     public bool ShowDatesTime()
     {
         showDatesList = showDB.SelectSingleShowDate(reservation.ShowId);
-        var showItem = ui.PrintMenuObjectDate(showDatesList);
+        var showItem = menu.PrintMenuObjectDate(showDatesList);
         reservation.ShowDateId = showItem.Item1;
         return showItem.Item2;
     }
