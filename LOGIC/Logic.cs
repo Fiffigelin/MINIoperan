@@ -14,6 +14,7 @@ class Logic
     Customer customer = new();
     CustomerDB customerDB = new();
     UI ui = new();
+    SeatUI seatui = new();
 
     public bool ShowsTitle()
     {
@@ -34,10 +35,10 @@ class Logic
     {
         // gets available seats from choosen show and date and holds choosen seats for user
         seatList = seatDB.GetAllSeats();
-        int[,] matrix = ConvertToMatrix();
+        int[,] matrix = seatui.ConvertToMatrix(seatList);
 
         seatList = seatDB.AvailableSeats(reservation.ShowDateId);
-        var seatsItem = ui.AvailableSeats(matrix, seatList);
+        var seatsItem = seatui.AvailableSeats(matrix, seatList);
         bookSeats = seatsItem.Item1;
         return seatsItem.Item2;
     }
@@ -60,38 +61,7 @@ class Logic
         SeatRender();
         ui.PrintTickets(reservation, customer, seatList, GetInfoForTickets());  
     }
-    // convert objects from list to elements in a dynamic array
-    private int[,] ConvertToMatrix()
-    {
-        int[,] seatMatrix;
-        int x = 0;
-        int y = 0;
-
-        foreach (var item in seatList)
-        {
-            if (item.Row == 1)
-            {
-                x++;
-            }
-            if (item.Row > y)
-            {
-                y++;
-            }
-        }
-        int[,] matrix = new int[y, x];
-        x = 0;
-        y = 0;
-
-        foreach (var item in seatList)
-        {
-            if (x >= matrix.GetLength(1)) x = 0;
-            y = item.Row - 1;
-
-            matrix[y, x] = item.Id;
-            x++;
-        }
-        return seatMatrix = matrix;
-    }
+    
     private (bool, Customer) SearchForEmail(string email)
     {
         customer = new();
