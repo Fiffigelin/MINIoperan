@@ -55,6 +55,7 @@ class Logic
         {
             customer = ui.CreateCustomer();
             customer.Phonenumber = GetPhonenr();
+            customer = customerDB.InserCustomer(customer);
             reservation.CustomerId = customer.Id;
         }
     }
