@@ -19,7 +19,7 @@ class Menu
             }
 
             Console.CursorVisible = false;
-            ConsoleKey key = Console.ReadKey().Key;
+            ConsoleKey key = Console.ReadKey(true).Key;
             switch (key)
             {
                 case ConsoleKey.DownArrow:
@@ -46,6 +46,34 @@ class Menu
         }
     }
 
+    public (int, bool) PrintArray(string[] array)
+    {
+        int markedLine = 0;
+        Console.WriteLine("WELCOME TO MINI OPERAN! SELECT WITH ENTER AND QUITE WITH Q\n");
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (i == markedLine)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+            }
+            Console.WriteLine(array[i]);
+            Console.ResetColor();
+        }
+
+        while (true)
+        {
+            Console.CursorVisible = false;
+            ConsoleKey key = Console.ReadKey(true).Key;
+            switch (key)
+            {
+                case ConsoleKey.Enter:
+                    return (markedLine, false);
+                case ConsoleKey.Q:
+                    return (-1, true);
+            }
+        }
+    }
+
     public (Show, bool) PrintMenuObjectTitle(List<Show> showObjects)
     {
         Show show = new();
@@ -65,7 +93,7 @@ class Menu
             }
 
             Console.CursorVisible = false;
-            ConsoleKey key = Console.ReadKey().Key;
+            ConsoleKey key = Console.ReadKey(true).Key;
             switch (key)
             {
                 case ConsoleKey.DownArrow:
@@ -124,7 +152,7 @@ WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
             }
 
             Console.CursorVisible = false;
-            ConsoleKey key = Console.ReadKey().Key;
+            ConsoleKey key = Console.ReadKey(true).Key;
             switch (key)
             {
                 case ConsoleKey.DownArrow:
@@ -169,25 +197,26 @@ WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
 
     public void PrintLogo(int showId)
     {
+        Console.Clear();
         switch (showId)
         {
             case 1:
                 Console.WriteLine($@"
-                   _,,
-               _''▀█████▄
-     PAHNTOM  _▄▄╥@░ _╙▓▓
-     OF THE   ╟▀_▐███▄▄▓▒
-     OPERA        ▀█▓▓▀╜");
+                                                               _,,
+                                                            _''▀█████▄
+                                                            _▄▄╥@░ _╙▓▓
+                                                            ╟▀_▐███▄▄▓▒
+                                                                ▀█▓▓▀╜");
                 break;
 
             case 2:
-            Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($@"
      _ , ,_                     __      
      ╘░╔  m[               _. `▀░░[     
        _╖, ╓▒                ▒@¬`╦╜");
-       Console.ResetColor();
-       Console.Write($@"      
+                Console.ResetColor();
+                Console.Write($@"      
                 _       _ _ _▄▀`        
           ▀ⁿ▄   ██ `'▀▀█▀▀  ██          
          █  _   █ █    █     _█         
@@ -196,30 +225,29 @@ WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
          █  _,      ▀                   
           `▀▀                     
         ");
-        Console.ResetColor();
+                Console.ResetColor();
                 break;
 
             case 3:
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($@"      
-      ▒▀▀▀▀▀▀▀▀▀▀▀▀▌█▀▀▀█   ▌▀▀▒▒▀▀▌
-      ▀▌ ▀▌▐▐▌ ▀▐▐▐█▀ ▀▌ █  ▌ ▀▀▀░▒▌
- ▐▌▀▀▀▀▀  ▐▌ ▌ ▀  ▄▀ ▒▒▒▄ ▌ ▌ █▌  ▀▀▀▀▌
-  ███▀███▀▌▒▒▀██▌▌█▀▀░▒▒███▒▀▀▀ ██████▌
-  ▀▄ █░  █▀ ▀ ▌ █ ▀▄  ▌ ▒▒▒ ▀▌ █  ▒▌▌▒▌
-   ▀   █   █ █ ▀▌▌ ▀  ▌ ▒▀▀▄█▌▒▒█  █▄
-    ▌▄█ █▄█▀█▒▒▀▀▀▌▄█ ▌▄█▀▌▄▄▄▄▄▄▄▄█▀");
+                                    ▒▀▀▀▀▀▀▀▀▀▀▀▀▌█▀▀▀█   ▌▀▀▒▒▀▀▌
+                                    ▀▌ ▀▌▐▐▌ ▀▐▐▐█▀ ▀▌ █  ▌ ▀▀▀░▒▌
+                               ▐▌▀▀▀▀▀  ▐▌ ▌ ▀  ▄▀ ▒▒▒▄ ▌ ▌ █▌  ▀▀▀▀▌
+                                ███▀███▀▌▒▒▀██▌▌█▀▀░▒▒███▒▀▀▀ ██████▌
+                                ▀▄ █░  █▀ ▀ ▌ █ ▀▄  ▌ ▒▒▒ ▀▌ █  ▒▌▌▒▌
+                                 ▀   █   █ █ ▀▌▌ ▀  ▌ ▒▀▀▄█▌▒▒█  █▄
+                                  ▌▄█ █▄█▀█▒▒▀▀▀▌▄█ ▌▄█▀▌▄▄▄▄▄▄▄▄█▀");
                 Console.ResetColor();
                 break;
 
             case 4:
-                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine($@"
 ▐▌▀█ ▐▌ ▀▀▀ █ ▀ █▀ ▀ █▀▀█     ▐▌ █  ▐▌   █▄   ▐
 ▐▄ ▀ ▐▌▄▄   ▌   ▐▄▄  ▐▄ █     ▐▄ ▀ ▄▀▐▄  ▌▐█▄ ▐       ▄  ▀▄▐  ▐
 ▐▌   ▐▌     ▌   ▐    ▐  ▀▄    ▐▌   ▌  █▄ ▌  ▐█▄  ▐   ▌█   ▌▐   ▀▌
 ▀     ▀ ▀   ▀   ▀▀ ▀ ▀    ▀       ▀    ▀ ▀");
-                Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.Write($@"
                    ▀█  ▄█  ▐▌ ▀█▀▀█  █▀▀▐▀██ ▀█▌   █    ▄▄
@@ -230,5 +258,6 @@ WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
                 Console.ResetColor();
                 break;
         }
+        Console.WriteLine(Environment.NewLine);
     }
 }

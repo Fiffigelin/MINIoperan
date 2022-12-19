@@ -7,19 +7,10 @@
         {
             var menu = logic.HeadMenu();
             if (menu.Item2 == (true)) break;
-            switch (menu.Item1)
-            {
-                case 0:
-                Console.WriteLine("Här kan man logga in som användare");
-                Console.ReadLine();
-                    continue;
+            if (logic.ShowsTitle() == true) continue;
+            if (logic.PrintShowInfo() == true) continue;
 
-                case 1:
-                    // prints out available shows titles
-                    if (logic.ShowsTitle() == true) continue;
-                    logic.PrintShowInfo();
-                    break;
-            }
+
             // prints out available shows by date and time
             if (logic.ShowDatesTime() == true) continue;
             // choose seats

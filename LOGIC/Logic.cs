@@ -19,7 +19,7 @@ class Logic
 
     public (int, bool) HeadMenu()
     {
-       string [] array = {"Log in", "Showinfo"};
+       string [] array = {"Show info"};
        var menuItem = menu.PrintMenuArray(array);
        return (menuItem.Item1, menuItem.Item2);
     }
@@ -30,11 +30,14 @@ class Logic
         reservation.ShowId = showItem.Item1.Id;
         return showItem.Item2;
     }
-    public void PrintShowInfo()
+    public bool PrintShowInfo()
     {
         menu.PrintLogo(reservation.ShowId);
         perfRoleList = showDB.SelectPerformerPerShow(reservation);
         tableUI.PrintRolesToShow(perfRoleList);
+        string[] array = {"Make a booking"};
+        var menuItem = menu.PrintArray(array);
+        return menuItem.Item2;
     }
 
     public bool ShowDatesTime()

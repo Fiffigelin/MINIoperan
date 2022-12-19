@@ -33,7 +33,6 @@ class TableUI
             PrintRow(item.RoleName, item.FirstName + " " + item.LastName);
             PrintLine();
         }
-        Console.ReadLine();
     }
 
     private void PrintLine()
