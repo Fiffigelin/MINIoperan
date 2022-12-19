@@ -84,4 +84,32 @@ class ShowDB
             return listOfShows;
         }
     }
+
+    public List<PerformerRole> SelectPerformerPerShow(Reservation reservation)
+    {
+        List<PerformerRole> perfRoleList = new();
+        var sql = ($@"SELECT roles_to_performers.roles_id, roles.name, performers.first_name, performers.last_name
+            FROM roles_to_performers
+            INNER JOIN roles ON roles_to_performers.roles_id = roles.id
+            INNER JOIN performers ON roles_to_performers.performers_id = performers.id
+            WHERE roles.shows_id = '{reservation.ShowId}';");
+
+        _sqlconnection.Open();
+        MySqlCommand cmd = new MySqlCommand(sql, _sqlconnection);
+        using (MySqlDataReader reader = cmd.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                PerformerRole perfRole = new();
+                perfRole.RolesId = Convert.ToInt32(reader["roles_to_performer.roles_id"].ToString());
+                perfRole.FirstName = reader["performers.first_name"].ToString()!;
+                perfRole.LastName = reader["performers.last_name"].ToString()!;
+                perfRole.RoleName = reader["roles.name"].ToString()!;
+                perfRole.ShowId = Convert.ToInt32(reader["roles.show_id"].ToString())!;              
+                perfRoleList.Add(perfRole);
+            }
+            _sqlconnection.Close();
+            return perfRoleList;
+        }
+    }
 }
