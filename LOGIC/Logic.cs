@@ -29,6 +29,10 @@ class Logic
         reservation.ShowId = showItem.Item1.Id;
         return showItem.Item2;
     }
+    public void PrintShowInfo()
+    {
+        menu.PrintLogo(reservation.ShowId);
+    }
 
     public bool ShowDatesTime()
     {

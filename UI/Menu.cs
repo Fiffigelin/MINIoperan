@@ -169,19 +169,27 @@ WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
     ");
     }
 
-    private void Logo()
+    public void PrintLogo(int showId)
     {
-        Console.WriteLine($@"
+        switch (showId)
+        {
+            case 1:
+                Console.WriteLine($@"
                    _,,
                _''▀█████▄
      PAHNTOM  _▄▄╥@░ _╙▓▓
      OF THE   ╟▀_▐███▄▄▓▒
      OPERA        ▀█▓▓▀╜");
+                break;
 
-        Console.WriteLine($@"
+            case 2:
+            Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($@"
      _ , ,_                     __      
      ╘░╔  m[               _. `▀░░[     
-       _╖, ╓▒                ▒@¬`╦╜      
+       _╖, ╓▒                ▒@¬`╦╜");
+       Console.ResetColor();
+       Console.Write($@"      
                 _       _ _ _▄▀`        
           ▀ⁿ▄   ██ `'▀▀█▀▀  ██          
          █  _   █ █    █     _█         
@@ -190,9 +198,12 @@ WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
          █  _,      ▀                   
           `▀▀                     
         ");
+        Console.ResetColor();
+                break;
 
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($@"      
+            case 3:
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($@"      
       ▒▀▀▀▀▀▀▀▀▀▀▀▀▌█▀▀▀█   ▌▀▀▒▒▀▀▌
       ▀▌ ▀▌▐▐▌ ▀▐▐▐█▀ ▀▌ █  ▌ ▀▀▀░▒▌
  ▐▌▀▀▀▀▀  ▐▌ ▌ ▀  ▄▀ ▒▒▒▄ ▌ ▌ █▌  ▀▀▀▀▌
@@ -200,6 +211,26 @@ WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
   ▀▄ █░  █▀ ▀ ▌ █ ▀▄  ▌ ▒▒▒ ▀▌ █  ▒▌▌▒▌
    ▀   █   █ █ ▀▌▌ ▀  ▌ ▒▀▀▄█▌▒▒█  █▄
     ▌▄█ █▄█▀█▒▒▀▀▀▌▄█ ▌▄█▀▌▄▄▄▄▄▄▄▄█▀");
-        Console.ResetColor();
+                Console.ResetColor();
+                break;
+
+            case 4:
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine($@"
+▐▌▀█ ▐▌ ▀▀▀ █ ▀ █▀ ▀ █▀▀█     ▐▌ █  ▐▌   █▄   ▐
+▐▄ ▀ ▐▌▄▄   ▌   ▐▄▄  ▐▄ █     ▐▄ ▀ ▄▀▐▄  ▌▐█▄ ▐       ▄  ▀▄▐  ▐
+▐▌   ▐▌     ▌   ▐    ▐  ▀▄    ▐▌   ▌  █▄ ▌  ▐█▄  ▐   ▌█   ▌▐   ▀▌
+▀     ▀ ▀   ▀   ▀▀ ▀ ▀    ▀       ▀    ▀ ▀");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write($@"
+                   ▀█  ▄█  ▐▌ ▀█▀▀█  █▀▀▐▀██ ▀█▌   █    ▄▄
+                    █▌▐▀▀█ █  ▐█▄█▀ ▐█     █▌▀▌▀█▌ █  ██▀ ▐▀█
+                     ██  ██   ▐█ ▀█▌ ██   ▄█ ▒▌  ▀██ ██   ▄ ░
+                     ▐    ▀   ▀▀▀  ▀▀ ░▀▀▀▐  ▀▀    ▀  █▌  ██░
+                                                        ▀▀▀");
+                Console.ResetColor();
+                break;
+        }
     }
 }
