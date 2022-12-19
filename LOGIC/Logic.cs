@@ -39,7 +39,6 @@ class Logic
         var menuItem = menu.PrintArray(array);
         return menuItem.Item2;
     }
-
     public bool ShowDatesTime()
     {
         showDatesList = showDB.SelectSingleShowDate(reservation.ShowId);
