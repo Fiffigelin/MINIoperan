@@ -1,16 +1,60 @@
 using System.Globalization;
-using System.Collections;
 class Menu
 {
     UI ui = new();
+
+    public (int, bool) PrintMenuArray(string[] array)
+    {
+        int markedLine = 0;
+        while (true)
+        {
+            Header();
+            Console.WriteLine("WELCOME TO MINI OPERAN! SELECT WITH ENTER AND QUITE WITH Q\n");
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i == markedLine)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                }
+                Console.WriteLine(array[i]);
+                Console.ResetColor();
+            }
+
+            Console.CursorVisible = false;
+            ConsoleKey key = Console.ReadKey().Key;
+            switch (key)
+            {
+                case ConsoleKey.DownArrow:
+                    markedLine++;
+                    if (markedLine > array.Length - 1)
+                    {
+                        markedLine = 0;
+                    }
+                    break;
+                case ConsoleKey.UpArrow:
+                    markedLine--;
+                    if (markedLine < 0)
+                    {
+                        markedLine = array.Length - 1;
+                    }
+                    break;
+                case ConsoleKey.Enter:
+                    return (markedLine, false);
+                case ConsoleKey.Q:
+                    return (-1, true);
+                default:
+                    break;
+            }
+        }
+    }
+
     public (Show, bool) PrintMenuObjectTitle(List<Show> showObjects)
     {
         Show show = new();
-        bool quit = true;
         int objectInt = showObjects.ElementAt(0).Id;
         while (true)
         {
-            ui.Header();
+            Header();
             Console.WriteLine("WELCOME TO MINI OPERAN! SELECT WITH ENTER AND QUITE WITH Q\n");
             foreach (var item in showObjects)
             {
@@ -41,14 +85,13 @@ class Menu
                     }
                     break;
                 case ConsoleKey.Enter:
-                    quit = false;
                     foreach (var item in showObjects)
                     {
                         if (item.Id == objectInt) show = item;
                     }
-                    return (show, quit);
+                    return (show, false);
                 case ConsoleKey.Q:
-                    return (show, quit);
+                    return (show, true);
                 default:
                     break;
             }
@@ -59,12 +102,11 @@ class Menu
     public (int, bool) PrintMenuObjectDate(List<ShowToDates> showObjects)
     {
         CultureInfo eng = new("en-EN");
-        bool quit = true;
         int objectInt = showObjects.ElementAt(0).DateTimeId;
         int objectCount = objectInt + showObjects.Count - 1;
         while (true)
         {
-            ui.Header();
+            Header();
             Console.WriteLine($@"
 WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
 
@@ -102,14 +144,28 @@ WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
                     }
                     break;
                 case ConsoleKey.Enter:
-                    quit = false;
-                    return (objectInt, quit);
+                    return (objectInt, false);
                 case ConsoleKey.Q:
-                    return (0, quit);
+                    return (0, true);
                 default:
                     break;
             }
             Console.Clear();
         }
+    }
+
+    public void Header()
+    {
+        Console.Clear();
+        Console.WriteLine(@$"
+                              ▄█▀      ▀█▄
+                          ▄▀▀▓▀▄         ██▄  
+                         ▓  ▄▀  █        ██▓█
+                          ▀▄▓▓▄▀         ▓██▓▌
+                           █▓██▌         ▓▓▓█▌
+                            █▓█▌         ▐▓██        
+            █▀▄▀█ █ █▄ █ █   ▀▓█         ▐▓▀
+            █ ▀ █ █ █ ▀█ █     ▀█▄     ▄█▀
+    ");
     }
 }

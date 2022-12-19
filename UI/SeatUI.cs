@@ -1,6 +1,6 @@
 class SeatUI
 {
-    UI ui = new();
+    Menu menu = new();
     public (List<Seat>, bool) AvailableSeats(int[,] seatMatrix, List<Seat> availableSeats)
     {
         bool quit = true;
@@ -15,7 +15,7 @@ class SeatUI
 
         while (true)
         {
-            ui.Header();
+            menu.Header();
             Console.WriteLine("CHOOSE SEATS WITH A, UNDO CHOOSEN SEAT WITH D. MAKE RESERVATION WITH ENTER. RETURN WITH Q.");
             // Console.WriteLine($"UserY = {UserY}, UserX = {UserX}"); // debugging
             PrintMatrix(availableSeats, seatMatrix, userSeat, UserY, UserX);

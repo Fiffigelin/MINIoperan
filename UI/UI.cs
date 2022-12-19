@@ -1,17 +1,14 @@
 class UI
 {
     public Customer customer = new();
-
-
-
-
+    Menu menu = new();
     public string InputCustomerEmail()
     {
         string email = string.Empty;
         while (true)
         {
             Console.CursorVisible = false;
-            Header();
+            menu.Header();
             do
             {
                 Console.Write("Please enter email : ");
@@ -27,13 +24,13 @@ class UI
         while (true)
         {
             Console.CursorVisible = false;
-            Header();
+            menu.Header();
             Console.WriteLine($"Hi {customer.FirstName} {customer.LastName}, is this you?\nAnswer Y/N");
             ConsoleKey key = Console.ReadKey(false).Key;
 
             if (key == ConsoleKey.Y)
             {
-                Header();
+                menu.Header();
                 Console.WriteLine($"Welcome back {customer.FirstName} {customer.LastName}");
                 int customerId = customer.Id;
                 Console.ReadLine();
@@ -51,7 +48,7 @@ class UI
         bool isPhone = false;
         while (true)
         {
-            Header();
+            menu.Header();
             do
             {
                 Console.Write("Please enter your first name  : ");
@@ -80,20 +77,5 @@ class UI
             phonenr = Console.ReadLine()!;
         } while (string.IsNullOrEmpty(phonenr));
         return phonenr;
-    }
-
-    public void Header()
-    {
-        Console.Clear();
-        Console.WriteLine(@$"
-                              ▄█▀      ▀█▄
-                          ▄▀▀▓▀▄         ██▄  
-                         ▓  ▄▀  █        ██▓█
-                          ▀▄▓▓▄▀         ▓██▓▌
-                           █▓██▌         ▓▓▓█▌
-                            █▓█▌         ▐▓██        
-            █▀▄▀█ █ █▄ █ █   ▀▓█         ▐▓▀
-            █ ▀ █ █ █ ▀█ █     ▀█▄     ▄█▀
-    ");
     }
 }

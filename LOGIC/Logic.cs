@@ -16,6 +16,12 @@ class Logic
     SeatUI seatui = new();
     TicketUI ticketui = new();
 
+    public (int, bool) HeadMenu()
+    {
+       string [] array = {"Log in", "Showinfo"};
+       var menuItem = menu.PrintMenuArray(array);
+       return (menuItem.Item1, menuItem.Item2);
+    }
     public bool ShowsTitle()
     {
         showTitle = showDB.SelectShows();
@@ -31,17 +37,7 @@ class Logic
         reservation.ShowDateId = showItem.Item1;
         return showItem.Item2;
     }
-    public bool SeatsPerShow()
-    {
-        // gets available seats from choosen show and date and holds choosen seats for user
-        seatList = seatDB.GetAllSeats();
-        int[,] matrix = seatui.ConvertToMatrix(seatList);
 
-        seatList = seatDB.AvailableSeats(reservation.ShowDateId);
-        var seatsItem = seatui.AvailableSeats(matrix, seatList);
-        bookSeats = seatsItem.Item1;
-        return seatsItem.Item2;
-    }
     public void CheckCustomer()
     {
         var customerItem = SearchForEmail(ui.InputCustomerEmail());
@@ -59,9 +55,9 @@ class Logic
         GetSeatInfo();
         CalculateTotalPrice();
         SeatRender();
-        ticketui.PrintTickets(reservation, customer, seatList, GetInfoForTickets());  
+        ticketui.PrintTickets(reservation, customer, seatList, GetInfoForTickets());
     }
-    
+
     private (bool, Customer) SearchForEmail(string email)
     {
         customer = new();
@@ -83,10 +79,10 @@ class Logic
     private string GetPhonenr()
     {
         string verifyPhonenr = string.Empty;
-        while(true)
+        while (true)
         {
-            verifyPhonenr =ui.AskForPhonenr();
-            if(IsStringNumeric(verifyPhonenr) == true) return verifyPhonenr;
+            verifyPhonenr = ui.AskForPhonenr();
+            if (IsStringNumeric(verifyPhonenr) == true) return verifyPhonenr;
         }
     }
     private bool IsStringNumeric(string s)
@@ -123,6 +119,17 @@ class Logic
             Seat bSeat = seatDB.GetSeatById(seat.Id);
             seatList.Add(bSeat);
         }
+    }
+    public bool SeatsPerShow()
+    {
+        // gets available seats from choosen show and date and holds choosen seats for user
+        seatList = seatDB.GetAllSeats();
+        int[,] matrix = seatui.ConvertToMatrix(seatList);
+
+        seatList = seatDB.AvailableSeats(reservation.ShowDateId);
+        var seatsItem = seatui.AvailableSeats(matrix, seatList);
+        bookSeats = seatsItem.Item1;
+        return seatsItem.Item2;
     }
     private void CalculateTotalPrice()
     {
