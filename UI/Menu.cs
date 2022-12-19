@@ -168,4 +168,38 @@ WELCOME TO MINI OPERAN! SELECT WITH ENTER AND RETURN WITH Q.
             █ ▀ █ █ █ ▀█ █     ▀█▄     ▄█▀
     ");
     }
+
+    private void Logo()
+    {
+        Console.WriteLine($@"
+                   _,,
+               _''▀█████▄
+     PAHNTOM  _▄▄╥@░ _╙▓▓
+     OF THE   ╟▀_▐███▄▄▓▒
+     OPERA        ▀█▓▓▀╜");
+
+        Console.WriteLine($@"
+     _ , ,_                     __      
+     ╘░╔  m[               _. `▀░░[     
+       _╖, ╓▒                ▒@¬`╦╜      
+                _       _ _ _▄▀`        
+          ▀ⁿ▄   ██ `'▀▀█▀▀  ██          
+         █  _   █ █    █     _█         
+        ]       ▌ ▄▌   █   _-▄▀         
+        ╘      _▌  ▐▄                   
+         █  _,      ▀                   
+          `▀▀                     
+        ");
+
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($@"      
+      ▒▀▀▀▀▀▀▀▀▀▀▀▀▌█▀▀▀█   ▌▀▀▒▒▀▀▌
+      ▀▌ ▀▌▐▐▌ ▀▐▐▐█▀ ▀▌ █  ▌ ▀▀▀░▒▌
+ ▐▌▀▀▀▀▀  ▐▌ ▌ ▀  ▄▀ ▒▒▒▄ ▌ ▌ █▌  ▀▀▀▀▌
+  ███▀███▀▌▒▒▀██▌▌█▀▀░▒▒███▒▀▀▀ ██████▌
+  ▀▄ █░  █▀ ▀ ▌ █ ▀▄  ▌ ▒▒▒ ▀▌ █  ▒▌▌▒▌
+   ▀   █   █ █ ▀▌▌ ▀  ▌ ▒▀▀▄█▌▒▒█  █▄
+    ▌▄█ █▄█▀█▒▒▀▀▀▌▄█ ▌▄█▀▌▄▄▄▄▄▄▄▄█▀");
+        Console.ResetColor();
+    }
 }
