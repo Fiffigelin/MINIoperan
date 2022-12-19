@@ -45,7 +45,6 @@ class UI
 
     public Customer CreateCustomer()
     {
-        bool isPhone = false;
         while (true)
         {
             menu.Header();

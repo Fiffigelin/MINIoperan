@@ -1,4 +1,4 @@
-class TicketUI
+class TableUI
 {
     public void PrintTickets(Reservation reservation, Customer customer, List<Seat> seatList, ShowToDates showDates)
     {
@@ -21,7 +21,19 @@ class TicketUI
             Console.Write($"\n\n");
         }
         Console.ReadLine();
+    }
 
+    public void PrintRolesToShow(List<PerformerRole> perfRoleList)
+    {
+        PrintLine();
+        PrintRow("ROLES NAME", "PERFOMERS NAME");
+        PrintLine();
+        foreach (var item in perfRoleList)
+        {
+            PrintRow(item.RoleName, item.FirstName + " " + item.LastName);
+            PrintLine();
+        }
+        Console.ReadLine();
     }
 
     private void PrintLine()

@@ -1,8 +1,6 @@
 using System.Globalization;
 class Menu
 {
-    UI ui = new();
-
     public (int, bool) PrintMenuArray(string[] array)
     {
         int markedLine = 0;

@@ -4,6 +4,7 @@ class Logic
     List<ShowToDates> showDatesList = new();
     List<Seat> seatList = new();
     List<Seat> bookSeats = new();
+    List <PerformerRole> perfRoleList = new();
     ShowDB showDB = new();
     SeatDB seatDB = new();
     SeatRender seatRender = new();
@@ -13,8 +14,8 @@ class Logic
     Customer customer = new();
     CustomerDB customerDB = new();
     UI ui = new();
-    SeatUI seatui = new();
-    TicketUI ticketui = new();
+    SeatUI seatUI = new();
+    TableUI tableUI = new();
 
     public (int, bool) HeadMenu()
     {
@@ -32,6 +33,8 @@ class Logic
     public void PrintShowInfo()
     {
         menu.PrintLogo(reservation.ShowId);
+        perfRoleList = showDB.SelectPerformerPerShow(reservation);
+        tableUI.PrintRolesToShow(perfRoleList);
     }
 
     public bool ShowDatesTime()
@@ -59,7 +62,7 @@ class Logic
         GetSeatInfo();
         CalculateTotalPrice();
         SeatRender();
-        ticketui.PrintTickets(reservation, customer, seatList, GetInfoForTickets());
+        tableUI.PrintTickets(reservation, customer, seatList, GetInfoForTickets());
     }
 
     private (bool, Customer) SearchForEmail(string email)
@@ -128,10 +131,10 @@ class Logic
     {
         // gets available seats from choosen show and date and holds choosen seats for user
         seatList = seatDB.GetAllSeats();
-        int[,] matrix = seatui.ConvertToMatrix(seatList);
+        int[,] matrix = seatUI.ConvertToMatrix(seatList);
 
         seatList = seatDB.AvailableSeats(reservation.ShowDateId);
-        var seatsItem = seatui.AvailableSeats(matrix, seatList);
+        var seatsItem = seatUI.AvailableSeats(matrix, seatList);
         bookSeats = seatsItem.Item1;
         return seatsItem.Item2;
     }

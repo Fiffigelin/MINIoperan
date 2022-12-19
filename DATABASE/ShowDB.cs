@@ -101,11 +101,11 @@ class ShowDB
             while (reader.Read())
             {
                 PerformerRole perfRole = new();
-                perfRole.RolesId = Convert.ToInt32(reader["roles_to_performer.roles_id"].ToString());
-                perfRole.FirstName = reader["performers.first_name"].ToString()!;
-                perfRole.LastName = reader["performers.last_name"].ToString()!;
-                perfRole.RoleName = reader["roles.name"].ToString()!;
-                perfRole.ShowId = Convert.ToInt32(reader["roles.show_id"].ToString())!;              
+                perfRole.RolesId = Convert.ToInt32(reader["roles_id"].ToString());
+                perfRole.FirstName = reader["first_name"].ToString()!;
+                perfRole.LastName = reader["last_name"].ToString()!;
+                perfRole.RoleName = reader["name"].ToString()!;
+                perfRole.ShowId = reservation.ShowId;              
                 perfRoleList.Add(perfRole);
             }
             _sqlconnection.Close();

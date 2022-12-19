@@ -17,6 +17,7 @@
                 case 1:
                     // prints out available shows titles
                     if (logic.ShowsTitle() == true) continue;
+                    logic.PrintShowInfo();
                     break;
             }
             // prints out available shows by date and time
