@@ -53,7 +53,7 @@ class Logic
         if (customerItem.Item1 == true) reservation.CustomerId = ui.CustomerLogic(customerItem.Item2);
         if (reservation.CustomerId == 0)
         {
-            customer = ui.CreateCustomer();
+            customer = ui.CreateCustomer(customer);
             customer.Phonenumber = GetPhonenr();
             customer = customerDB.InserCustomer(customer);
             reservation.CustomerId = customer.Id;
@@ -66,6 +66,12 @@ class Logic
         CalculateTotalPrice();
         SeatRender();
         tableUI.PrintTickets(reservation, customer, seatList, GetInfoForTickets());
+    }
+
+    public void CreateInlog()
+    {
+        customer.Password = ui.CreatePassword();
+        customerDB.InsertPassword(customer);
     }
 
     private (bool, Customer) SearchForEmail(string email)

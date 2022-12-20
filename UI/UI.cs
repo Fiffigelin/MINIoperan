@@ -26,7 +26,7 @@ class UI
             Console.CursorVisible = false;
             menu.Header();
             Console.WriteLine($"Hi {customer.FirstName} {customer.LastName}, is this you?\nAnswer Y/N");
-            ConsoleKey key = Console.ReadKey(false).Key;
+            ConsoleKey key = Console.ReadKey(true).Key;
 
             if (key == ConsoleKey.Y)
             {
@@ -43,7 +43,7 @@ class UI
         }
     }
 
-    public Customer CreateCustomer()
+    public Customer CreateCustomer(Customer customer)
     {
         while (true)
         {
@@ -58,11 +58,6 @@ class UI
                 Console.Write("Please enter your last name   : ");
                 customer.LastName = Console.ReadLine()!;
             } while (string.IsNullOrEmpty(customer.LastName));
-            do
-            {
-                Console.Write("Please enter email            : ");
-                customer.Email = Console.ReadLine()!;
-            } while (!customer.Email.Contains("@") || string.IsNullOrEmpty(customer.Email));
             return customer;
         }
     }
@@ -76,5 +71,25 @@ class UI
             phonenr = Console.ReadLine()!;
         } while (string.IsNullOrEmpty(phonenr));
         return phonenr;
+    }
+
+    public string CreatePassword()
+    {
+        Console.WriteLine("Would you like to create a inlog?");
+        Console.WriteLine("Answer with Y/N");
+        ConsoleKey key = Console.ReadKey(true).Key;
+
+        string password = string.Empty;
+        if(key == ConsoleKey.Y)
+        {
+            do
+            {
+            Console.WriteLine("Make a password thats minimum 6 chars long");
+            Console.Write("Please enter your password : ");
+            password = Console.ReadLine();
+
+            } while (password.Length < 6);
+        }
+        return password;
     }
 }

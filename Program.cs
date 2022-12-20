@@ -9,10 +9,10 @@
             if (menu.Item2 == (true)) break;
             switch (menu.Item1)
             {
-                case 0:
-                    // User inlog here
-                    break;
-                case 1:
+                // case 0:
+                //     // User inlog here
+                //     break;
+                case 0: // change to 1 when user inlog is created
                 BookShows();
                     break;
             }
@@ -31,5 +31,6 @@
             logic.CheckCustomer();
             // calculate cost and insert reservation to DB and prints out ticket/s
             logic.MakeReservation();
+            logic.CreateInlog();
     }
 }

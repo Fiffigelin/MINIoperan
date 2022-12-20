@@ -63,8 +63,8 @@ class CustomerDB
         return customer;
     }
 
-    public void CreatePassword(Customer customer, string password)
+    public void InsertPassword(Customer customer)
     {
-        _sqlconnection.Execute($@"UPDATE customers SET password = '{password}' WHERE customers.id = '{customer.Id}';");
+        _sqlconnection.Execute($@"UPDATE customers SET password = '{customer.Password}' WHERE customers.id = '{customer.Id}';");
     }
 }
