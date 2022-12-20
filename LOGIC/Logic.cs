@@ -4,7 +4,7 @@ class Logic
     List<ShowToDates> showDatesList = new();
     List<Seat> seatList = new();
     List<Seat> bookSeats = new();
-    List <PerformerRole> perfRoleList = new();
+    List<PerformerRole> perfRoleList = new();
     ShowDB showDB = new();
     SeatDB seatDB = new();
     SeatRender seatRender = new();
@@ -19,9 +19,39 @@ class Logic
 
     public (int, bool) HeadMenu()
     {
-       string [] array = {"Show info"};
-       var menuItem = menu.PrintMenuArray(array);
-       return (menuItem.Item1, menuItem.Item2);
+        string[] array = { "Login", "Show info" };
+        var menuItem = menu.PrintMenuArray(array);
+        return (menuItem.Item1, menuItem.Item2);
+    }
+    public bool LogIn()
+    {
+        customer = customerDB.GetCustomerByEmail(ui.InputCustomerEmail());
+        var password = ui.VerifyPassword(customer);
+        Console.WriteLine(password.Item1);
+        Console.ReadLine();
+        return password.Item1;
+    }
+    public bool UsersMenu()
+    {
+        string[] array = { "Print booked shows" };
+        var menuItem = menu.PrintMenuArray(array);
+        return menuItem.Item2;
+    }
+    public void PrintBookedShows()
+    {
+        seatList.Clear();
+        ShowToDates showDates = new();
+        List<int> intList = reservationDB.SelectReservationsByCustomer(customer);
+
+        foreach (var item in intList)
+        {
+            reservation = reservationDB.SelectSingleReservation(item);
+            var classObjects = reservationDB.SelectReceiptInfo(reservation);
+            seatList= classObjects.Item1;
+            showDates = classObjects.Item2;
+            tableUI.PrintBooked(customer, reservation, seatList, showDates);
+        }
+        Console.ReadKey(true);
     }
     public bool ShowsTitle()
     {
@@ -35,7 +65,7 @@ class Logic
         menu.PrintLogo(reservation.ShowId);
         perfRoleList = showDB.SelectPerformerPerShow(reservation);
         tableUI.PrintRolesToShow(perfRoleList);
-        string[] array = {"Make a booking"};
+        string[] array = { "Make a booking" };
         var menuItem = menu.PrintArray(array);
         return menuItem.Item2;
     }
@@ -74,10 +104,8 @@ class Logic
         customerDB.InsertPassword(customer);
     }
 
-    private (bool, Customer) SearchForEmail(string email)
+    private (bool, Customer) SearchForEmail(Customer customer)
     {
-        customer = new();
-        customer.Email = email;
         while (true)
         {
             customer = customerDB.GetCustomerByEmail(customer);

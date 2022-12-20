@@ -1,5 +1,26 @@
 class TableUI
 {
+    public void PrintBooked(Customer customer, Reservation reservation, List<Seat> seatList, ShowToDates showDates)
+    {
+        PrintLine();
+        PrintRow("Name", customer.FirstName + " " + customer.LastName);
+        PrintLine();
+        PrintRow("Show", showDates.Title);
+        PrintLine();
+        PrintRow("Date", showDates.Date.ToString("yyyy-MM-dd"));
+        PrintLine();
+        PrintRow("Time", showDates.Time.ToString());
+        PrintLine();
+        PrintRow("Section", "Row", "Seatnumber", "Price");
+        foreach (var seat in seatList)
+        {
+            PrintLine();
+            PrintRow(seat.Section, seat.Row.ToString(), seat.Id.ToString(), seat.Price.ToString());
+        }
+        PrintLine();
+        Console.WriteLine(Environment.NewLine);
+
+    }
     public void PrintTickets(Reservation reservation, Customer customer, List<Seat> seatList, ShowToDates showDates)
     {
         foreach (var seat in seatList)

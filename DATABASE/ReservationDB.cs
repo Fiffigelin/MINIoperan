@@ -81,4 +81,10 @@ class ReservationDB
 
         }
     }
+
+    public List<int> SelectReservationsByCustomer(Customer customer)
+    {
+        var reservationList = _sqlconnection.Query<int>($@"SELECT reservations.id FROM reservations WHERE reservations.customer_id = '{customer.Id}';").ToList();
+        return reservationList;
+    }
 }

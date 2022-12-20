@@ -25,6 +25,7 @@ class CustomerDB
                 customer.LastName = reader["last_name"].ToString();
                 customer.Email = reader["email"].ToString();
                 customer.Phonenumber = reader["phonenumber"].ToString();
+                customer.Password = reader["password"].ToString();
             }
             _sqlconnection.Close();
             return customer;

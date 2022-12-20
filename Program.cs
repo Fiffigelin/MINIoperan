@@ -9,15 +9,21 @@
             if (menu.Item2 == (true)) break;
             switch (menu.Item1)
             {
-                // case 0:
-                //     // User inlog here
-                //     break;
-                case 0: // change to 1 when user inlog is created
+                case 0:
+                    UsersInlog();
+                    break;
+                case 1:
                 BookShows();
                     break;
             }
 
         }
+    }
+    public static void UsersInlog()
+    {
+        if (logic.LogIn() == false) return;
+        if (logic.UsersMenu() == true) return;
+        logic.PrintBookedShows();
     }
     public static void BookShows()
     {
