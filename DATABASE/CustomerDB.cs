@@ -62,4 +62,9 @@ class CustomerDB
         customer.Id = _sqlconnection.QuerySingle<int>(sql);
         return customer;
     }
+
+    public void CreatePassword(Customer customer, string password)
+    {
+        _sqlconnection.Execute($@"UPDATE customers SET password = '{password}' WHERE customers.id = '{customer.Id}';");
+    }
 }
