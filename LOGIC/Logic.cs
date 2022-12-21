@@ -62,7 +62,7 @@ class Logic
     {
         var remove = ui.RemoveShowsID();
         if (remove.Item2 == true) return true;
-
+        reservationDB.DeleteReservation(remove.Item1);
         return false;
     }
     public bool ShowsTitle()

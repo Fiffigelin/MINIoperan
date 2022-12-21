@@ -51,13 +51,13 @@ class UI
     {
         Console.WriteLine("If you accidentally came here, you can return by pressing Q.");
         Console.Write("Please enter BookingId you want to cancel : ");
-        ConsoleKey key = Console.ReadKey(true).Key;
-        if (key == ConsoleKey.Q || key == ConsoleKey.NumPad0 || key == ConsoleKey.D0)
+        string input = Console.ReadLine();
+        if (input.ToUpper() == "Q" || input == 0.ToString())
         {
             return (0, true);
         }
 
-        int id = Convert.ToInt32(key);
+        int id = Convert.ToInt32(input);
         return (id, false);
     }
 

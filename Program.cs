@@ -27,6 +27,7 @@
             if (logic.UsersMenu() == true) return;
             logic.PrintBookedShows();
             if (logic.RemoveBooking() == true) continue;
+            if(logic.ExecuteRemoving() == true) continue;
         }
     }
     public static void BookShows()
