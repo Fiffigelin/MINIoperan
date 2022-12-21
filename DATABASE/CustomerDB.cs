@@ -20,6 +20,7 @@ class CustomerDB
         {
             while (reader.Read())
             {
+                customer = new();
                 customer.Id = Convert.ToInt32(reader["id"].ToString());
                 customer.FirstName = reader["first_name"].ToString();
                 customer.LastName = reader["last_name"].ToString();
@@ -47,6 +48,7 @@ class CustomerDB
                 customer.LastName = reader["last_name"].ToString();
                 customer.Email = reader["email"].ToString();
                 customer.Phonenumber = reader["phonenumber"].ToString();
+                customer.Password = reader["password"].ToString();
             }
             _sqlconnection.Close();
             return customer;

@@ -13,7 +13,7 @@
                     UsersInlog();
                     break;
                 case 1:
-                BookShows();
+                    BookShows();
                     break;
             }
 
@@ -22,21 +22,25 @@
     public static void UsersInlog()
     {
         if (logic.LogIn() == false) return;
-        if (logic.UsersMenu() == true) return;
-        logic.PrintBookedShows();
+        while (true)
+        {
+            if (logic.UsersMenu() == true) return;
+            logic.PrintBookedShows();
+            if (logic.RemoveBooking() == true) continue;
+        }
     }
     public static void BookShows()
     {
-            if (logic.ShowsTitle() == true) return;
-            if (logic.PrintShowInfo() == true) return;
-            // prints out available shows by date and time
-            if (logic.ShowDatesTime() == true) return;
-            // choose seats
-            if (logic.SeatsPerShow() == true) return;
-            // check if customer exists in DB, if not new customer is created
-            logic.CheckCustomer();
-            // calculate cost and insert reservation to DB and prints out ticket/s
-            logic.MakeReservation();
-            logic.CreateInlog();
+        if (logic.ShowsTitle() == true) return;
+        if (logic.PrintShowInfo() == true) return;
+        // prints out available shows by date and time
+        if (logic.ShowDatesTime() == true) return;
+        // choose seats
+        if (logic.SeatsPerShow() == true) return;
+        // check if customer exists in DB, if not new customer is created
+        logic.CheckCustomer();
+        // calculate cost and insert reservation to DB and prints out ticket/s
+        logic.MakeReservation();
+        logic.CreateInlog();
     }
 }

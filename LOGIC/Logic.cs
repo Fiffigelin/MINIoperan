@@ -27,8 +27,6 @@ class Logic
     {
         customer = customerDB.GetCustomerByEmail(ui.InputCustomerEmail());
         var password = ui.VerifyPassword(customer);
-        Console.WriteLine(password.Item1);
-        Console.ReadLine();
         return password.Item1;
     }
     public bool UsersMenu()
@@ -47,11 +45,25 @@ class Logic
         {
             reservation = reservationDB.SelectSingleReservation(item);
             var classObjects = reservationDB.SelectReceiptInfo(reservation);
-            seatList= classObjects.Item1;
+            seatList = classObjects.Item1;
             showDates = classObjects.Item2;
             tableUI.PrintBooked(customer, reservation, seatList, showDates);
         }
         Console.ReadKey(true);
+    }
+
+    public bool RemoveBooking()
+    {
+        string[] array = { "Remove booking" };
+        var menuItem = menu.PrintArray(array);
+        return menuItem.Item2;
+    }
+    public bool ExecuteRemoving()
+    {
+        var remove = ui.RemoveShowsID();
+        if (remove.Item2 == true) return true;
+
+        return false;
     }
     public bool ShowsTitle()
     {
@@ -79,8 +91,13 @@ class Logic
 
     public void CheckCustomer()
     {
-        var customerItem = SearchForEmail(ui.InputCustomerEmail());
-        if (customerItem.Item1 == true) reservation.CustomerId = ui.CustomerLogic(customerItem.Item2);
+        customer = customerDB.GetCustomerByEmail(ui.InputCustomerEmail());
+        bool found = SearchForEmail(customer);
+        if (found == true) 
+        {
+            ui.CustomerLogic(customer);
+            reservation.CustomerId = customer.Id;
+        }
         if (reservation.CustomerId == 0)
         {
             customer = ui.CreateCustomer(customer);
@@ -88,6 +105,7 @@ class Logic
             customer = customerDB.InserCustomer(customer);
             reservation.CustomerId = customer.Id;
         }
+        customer = customerDB.GetCustomerById(reservation);
     }
 
     public void MakeReservation()
@@ -100,22 +118,25 @@ class Logic
 
     public void CreateInlog()
     {
-        customer.Password = ui.CreatePassword();
-        customerDB.InsertPassword(customer);
+        if (string.IsNullOrEmpty(customer.Password))
+        {
+            customer.Password = ui.CreatePassword();
+            customerDB.InsertPassword(customer);
+        }
     }
 
-    private (bool, Customer) SearchForEmail(Customer customer)
+    private bool SearchForEmail(Customer customer)
     {
         while (true)
         {
             customer = customerDB.GetCustomerByEmail(customer);
             if (customer.Id == 0)
             {
-                return (false, customer);
+                return false;
             }
             else
             {
-                return (true, customer);
+                return true;
             }
         }
     }

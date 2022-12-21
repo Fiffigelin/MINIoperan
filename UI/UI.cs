@@ -39,7 +39,6 @@ class UI
 
         } while (password.Length < 5 || count == 3);
 
-        Console.WriteLine(password + " = " + customer.Password);
         if (password == customer.Password)
         {
             return (true, customer);
@@ -48,7 +47,21 @@ class UI
         return (false, customer);
     }
 
-    public int CustomerLogic(Customer customer)
+    public (int, bool) RemoveShowsID()
+    {
+        Console.WriteLine("If you accidentally came here, you can return by pressing Q.");
+        Console.Write("Please enter BookingId you want to cancel : ");
+        ConsoleKey key = Console.ReadKey(true).Key;
+        if (key == ConsoleKey.Q || key == ConsoleKey.NumPad0 || key == ConsoleKey.D0)
+        {
+            return (0, true);
+        }
+
+        int id = Convert.ToInt32(key);
+        return (id, false);
+    }
+
+    public Customer CustomerLogic(Customer customer)
     {
         while (true)
         {
@@ -60,14 +73,13 @@ class UI
             if (key == ConsoleKey.Y)
             {
                 menu.Header();
-                Console.WriteLine($"Welcome back {customer.FirstName} {customer.LastName}");
-                int customerId = customer.Id;
+                Console.WriteLine($"Welcome back {customer.FirstName} {customer.LastName}");;
                 Console.ReadLine();
-                return customerId;
+                return customer;
             }
             else if (key == ConsoleKey.N)
             {
-                return 0;
+                return customer;
             }
         }
     }
