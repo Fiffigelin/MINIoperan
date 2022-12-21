@@ -87,4 +87,9 @@ class ReservationDB
         var reservationList = _sqlconnection.Query<int>($@"SELECT reservations.id FROM reservations WHERE reservations.customer_id = '{customer.Id}';").ToList();
         return reservationList;
     }
+
+    public void DeleteReservation(int id)
+    {
+        _sqlconnection.Execute($@"DELETE FROM reservations WHERE id = '{id}';");
+    }
 }

@@ -3,7 +3,7 @@ class TableUI
     public void PrintBooked(Customer customer, Reservation reservation, List<Seat> seatList, ShowToDates showDates)
     {
         PrintLine();
-        PrintRow("Name", customer.FirstName + " " + customer.LastName);
+        PrintRow($"Booking : {reservation.Id}", $"{customer.FirstName} {customer.LastName}");
         PrintLine();
         PrintRow("Show", showDates.Title);
         PrintLine();
@@ -26,7 +26,7 @@ class TableUI
         foreach (var seat in seatList)
         {
             PrintLine();
-            PrintRow("Name", customer.FirstName + " " + customer.LastName);
+            PrintRow("Name", $"{customer.FirstName} {customer.LastName}");
             PrintLine();
             PrintRow("Show", showDates.Title);
             PrintLine();
