@@ -2,6 +2,8 @@ class TableUI
 {
     public void PrintBooked(Customer customer, Reservation reservation, List<Seat> seatList, ShowToDates showDates)
     {
+        int sumPrice = 0;
+
         PrintLine();
         PrintRow($"Booking : {reservation.Id}", $"{customer.FirstName} {customer.LastName}");
         PrintLine();
@@ -16,7 +18,10 @@ class TableUI
         {
             PrintLine();
             PrintRow(seat.Section, seat.Row.ToString(), seat.Id.ToString(), seat.Price.ToString());
+            sumPrice += seat.Price;
         }
+        PrintLine();
+        PrintRow("Total price", sumPrice.ToString());
         PrintLine();
         Console.WriteLine(Environment.NewLine);
 
