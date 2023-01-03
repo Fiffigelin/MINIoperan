@@ -164,6 +164,8 @@ class Logic
         }
         return true;
     }
+
+    // assign choosen seats to reservation
     private void SeatRender()
     {
         reservation = reservationDB.InsertReservation(reservation);

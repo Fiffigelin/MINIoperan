@@ -15,6 +15,7 @@ class CustomerDB
     {
         string sql = $"SELECT * FROM customers WHERE customers.email = '{customer.Email}'";
         _sqlconnection.Open();
+
         MySqlCommand cmd = new MySqlCommand(sql, _sqlconnection);
         using (MySqlDataReader reader = cmd.ExecuteReader())
         {
