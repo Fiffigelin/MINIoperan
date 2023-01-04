@@ -25,7 +25,7 @@ class Logic
     }
     public bool LogIn()
     {
-        customer = customerDB.GetCustomerByEmail(ui.InputCustomerEmail());
+        customer = customerDB.SelectCustomerByEmail(ui.InputCustomerEmail());
         var password = ui.VerifyPassword(customer);
         return password.Item1;
     }
@@ -91,7 +91,7 @@ class Logic
 
     public void CheckCustomer()
     {
-        customer = customerDB.GetCustomerByEmail(ui.InputCustomerEmail());
+        customer = customerDB.SelectCustomerByEmail(ui.InputCustomerEmail());
         bool found = SearchForEmail(customer);
         if (found == true) 
         {
@@ -105,7 +105,7 @@ class Logic
             customer = customerDB.InserCustomer(customer);
             reservation.CustomerId = customer.Id;
         }
-        customer = customerDB.GetCustomerById(reservation);
+        customer = customerDB.SelectCustomerById(reservation);
     }
 
     public void MakeReservation()
@@ -125,11 +125,12 @@ class Logic
         }
     }
 
+    // check if input of email already exists in db
     private bool SearchForEmail(Customer customer)
     {
         while (true)
         {
-            customer = customerDB.GetCustomerByEmail(customer);
+            customer = customerDB.SelectCustomerByEmail(customer);
             if (customer.Id == 0)
             {
                 return false;
@@ -141,6 +142,7 @@ class Logic
         }
     }
 
+    // verify right amount of numbers
     private string GetPhonenr()
     {
         string verifyPhonenr = string.Empty;
@@ -150,6 +152,8 @@ class Logic
             if (IsStringNumeric(verifyPhonenr) == true) return verifyPhonenr;
         }
     }
+
+    // verify however phonenumber contains only digits
     private bool IsStringNumeric(string s)
     {
         foreach (char c in s)
@@ -175,7 +179,7 @@ class Logic
             seatRender.SeatId = seat.Id;
             seatRender.ReservationId = reservation.Id;
             seatRender.ShowDateId = reservation.ShowDateId;
-            seatDB.SeatToReservation(seatRender);
+            seatDB.InsertSeatToReservation(seatRender);
         }
     }
     private void GetSeatInfo()
@@ -183,17 +187,17 @@ class Logic
         seatList.Clear();
         foreach (var seat in bookSeats)
         {
-            Seat bSeat = seatDB.GetSeatById(seat.Id);
+            Seat bSeat = seatDB.SelectSeatById(seat.Id);
             seatList.Add(bSeat);
         }
     }
     public bool SeatsPerShow()
     {
         // gets available seats from choosen show and date and holds choosen seats for user
-        seatList = seatDB.GetAllSeats();
+        seatList = seatDB.SelectAllSeats();
         int[,] matrix = seatUI.ConvertToMatrix(seatList);
 
-        seatList = seatDB.AvailableSeats(reservation.ShowDateId);
+        seatList = seatDB.SelectAvailableSeats(reservation.ShowDateId);
         var seatsItem = seatUI.AvailableSeats(matrix, seatList);
         bookSeats = seatsItem.Item1;
         return seatsItem.Item2;
@@ -209,10 +213,11 @@ class Logic
         reservation.Price = totalCost;
     }
 
+    // gets info for outprint from db
     private ShowToDates GetInfoForTickets()
     {
         reservation = reservationDB.SelectSingleReservation(reservation.Id);
-        customer = customerDB.GetCustomerById(reservation);
+        customer = customerDB.SelectCustomerById(reservation);
         var classObjects = reservationDB.SelectReceiptInfo(reservation);
         seatList = classObjects.Item1;
         return classObjects.Item2;

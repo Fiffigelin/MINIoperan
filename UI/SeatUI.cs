@@ -1,5 +1,8 @@
 class SeatUI
 {
+    // Handles the function of seatplacement and selection in a booking.
+    // Using dynamic array for output of seats and graph for the movement of the indicator
+    // I'm in chock and amazed at the same time that I figurered it out :)
     Menu menu = new();
     public (List<Seat>, bool) AvailableSeats(int[,] seatMatrix, List<Seat> availableSeats)
     {
@@ -98,6 +101,8 @@ class SeatUI
         bool IsSeatAvailable = false;
         bool IsSeatChoosen = false;
         int[,] matrix = seatMatrix;
+
+        // checks however a seat is available or not
         for (int i = 0; i < matrix.GetLength(0); i++)
         {
             for (int j = 0; j < matrix.GetLength(1); j++)
@@ -111,6 +116,7 @@ class SeatUI
                     }
                 }
 
+                // checks if a seat is choosen for booking
                 foreach (var uSeat in userSeat)
                 {
                     if (uSeat.Id == matrix[i, j])
@@ -120,7 +126,7 @@ class SeatUI
                     }
                 }
 
-                // prints out green for available and red for occupied
+                // prints out seats : green for available, and : red for occupied
                 if (IsSeatAvailable == true)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -131,7 +137,7 @@ class SeatUI
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                 }
 
-                // print out blue when choosen for booking
+                // print out blue if seat is choosen for booking
                 if (IsSeatChoosen == true)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;

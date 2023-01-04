@@ -11,7 +11,7 @@ class CustomerDB
         _sqlconnection = connection.ConnectDatabase();
     }
 
-    public Customer GetCustomerByEmail(Customer customer)
+    public Customer SelectCustomerByEmail(Customer customer)
     {
         string sql = $"SELECT * FROM customers WHERE customers.email = '{customer.Email}'";
         _sqlconnection.Open();
@@ -34,7 +34,7 @@ class CustomerDB
         }
     }
 
-    public Customer GetCustomerById(Reservation reservation)
+    public Customer SelectCustomerById(Reservation reservation)
     {
         Customer customer = new();
         string sql = $"SELECT * FROM customers WHERE customers.id = '{reservation.CustomerId}'";

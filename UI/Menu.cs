@@ -1,6 +1,7 @@
 using System.Globalization;
 class Menu
 {
+    // class responsibility is to write out the menu and return the result of users choice
     public (int, bool) PrintMenuArray(string[] array)
     {
         int markedLine = 0;

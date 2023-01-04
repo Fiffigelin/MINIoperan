@@ -1,5 +1,6 @@
 class TableUI
 {
+    // a class which have the responsibility to handle output in forms of tickets and bookinginformations
     public void PrintBooked(Customer customer, Reservation reservation, List<Seat> seatList, ShowToDates showDates)
     {
         int sumPrice = 0;
