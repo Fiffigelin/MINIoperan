@@ -92,4 +92,10 @@ class ReservationDB
     {
         _sqlconnection.Execute($@"DELETE FROM reservations WHERE id = '{id}';");
     }
+
+    public List<int> CountSumReservation(Customer customer)
+    {
+        List<int> intList = new();
+        return intList = _sqlconnection.Query<int>($@"SELECT COUNT(shows_id) FROM reservations WHERE customer_id = '{customer.Id}' UNION SELECT SUM(price) FROM reservations WHERE customer_id = '{customer.Id}'").ToList();
+    }
 }

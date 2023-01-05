@@ -133,4 +133,11 @@ class UI
         }
         return password;
     }
+
+    public void PrintCountSum(List<int> intList)
+    {
+        Console.WriteLine($"Total amount of shows booked : {intList.ElementAt(0)}");
+        Console.WriteLine($"Total price                  : {intList.ElementAt(1)}");
+        Console.WriteLine(Environment.NewLine);
+    }
 }

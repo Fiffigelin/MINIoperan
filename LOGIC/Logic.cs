@@ -49,6 +49,8 @@ class Logic
             showDates = classObjects.Item2;
             tableUI.PrintBooked(customer, reservation, seatList, showDates);
         }
+        intList = reservationDB.CountSumReservation(customer);
+        ui.PrintCountSum(intList);
         Console.ReadKey(true);
     }
 
