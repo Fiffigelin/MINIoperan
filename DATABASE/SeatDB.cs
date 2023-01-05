@@ -20,7 +20,8 @@ class SeatDB
         return _sqlconnection.Query<Seat>($@"SELECT seats.id 
         FROM seats
         WHERE seats.id NOT IN 
-        (select seats_to_reservations.seats_id FROM seats_to_reservations WHERE seats_to_reservations.shows_dates_id = '{dateId}')").ToList();
+        (SELECT seats_to_reservations.seats_id FROM seats_to_reservations 
+        WHERE seats_to_reservations.shows_dates_id = '{dateId}')").ToList();
     }
 
     public Seat SelectSeatById(int seatId)
