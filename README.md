@@ -1,10 +1,6 @@
 # MINIoperan
 Enskild inlämningsuppgift i kursen DB med Krister Trangius som lärare.
 
-I mappen Rapport ligger rapporten om arbetet samt diagram över databasen.
-
-I mappen SQLDB finns den exporterade databasen som SQL.
-
 Funktioner som behandlar databasen med kommandon ; 
 INSERT : 
 - CustomerDB rad 59
@@ -26,10 +22,6 @@ COUNT & SUM :
 
 ENG
 A individual project in the course DB with Krister Trangius as teacher.
-
-The folder Rapport holds the document and charts for the database.
-
-The folder SQLDB contains the database as a exportet SQL.file.
 
 Functions for the database which handles commands as ; 
 INSERT : 
